@@ -1,5 +1,6 @@
 import random
 import sys
+from itertools import product
 
 import jpamb
 import jvm
@@ -157,13 +158,60 @@ def fuzz_input(rand: random.Random, methodid: jvm.AbsMethodID) -> jpamb.case.Inp
     return jpamb.case.Input(input)
 
 
+def random_inputs(rand, methodid):
+    """Supply the ten trials used by the random fuzzer."""
+    for trial in range(10):
+        yield fuzz_input(rand, methodid)
+
+
+def fuzz_small(rand, methodid, max_depth=3):
+    """Try small arguments in order of their largest integer magnitude."""
+    if max_depth < 0:
+        raise ValueError("max_depth must be zero or greater")
+
+    parameters = methodid.extension.params
+    for parameter in parameters:
+        if not isinstance(parameter, (jvm.Int, jvm.Boolean)):
+            print(f"SmallCheck cannot generate parameter type {parameter}", file=sys.stderr)
+            return
+        
+    # Initialize with 0, or with True and False
+    integers = [jpamb.case.Int(0)]
+    booleans = [jpamb.case.Boolean(False), jpamb.case.Boolean(True)]
+
+    for depth in range(max_depth + 1):
+        if depth > 0:
+            integers.append(jpamb.case.Int(depth))
+            integers.append(jpamb.case.Int(-depth))
+
+        choices_by_parameter = []
+        for parameter in parameters:
+            if isinstance(parameter, jvm.Int):
+                choices_by_parameter.append(integers)   # In the first run, 0 is appended
+            else:
+                choices_by_parameter.append(booleans)   # In the first run, True and False is appended
+
+        # Pick one value per parameter, in method-signature order.
+        for arguments in product(*choices_by_parameter): # Can be (0, False), (0, True)
+            # Boolean-only and empty argument lists have depth zero.
+            argument_depth = 0
+            for argument in arguments:
+                if isinstance(argument, jpamb.case.Int):
+                    magnitude = abs(argument.value)
+                    argument_depth = max(argument_depth, magnitude)
+
+            if argument_depth == depth:
+                input_case = jpamb.case.Input(list(arguments))
+                yield input_case
+
+
 def analyse():
     """The dynamic analysis, e.g. in this case a (dumb) fuzzer."""
 
     methodid = jpamb.getmethodid(
         "dynamic",
         "1.0",
-        "The Rice Theorem Cookers",
+        "Los Pollos Hermanos",
         ["dynamic", "python"],
         for_science=True,
     )
@@ -179,15 +227,16 @@ def analyse():
     rand = random.Random(0)
 
     behaviors = set()
-    # Try 10 random inputs
-    for i in range(10):
-        input = fuzz_input(rand, methodid)
+    # Choose one input strategy.
+    inputs = random_inputs(rand, methodid)
+    # inputs = fuzz_small(rand, methodid)
+    for input in inputs:
         state = initial(bc, methodid, input)
 
-        for x in range(MAX_STEPS):
+        for x in range(MAX_STEPS):  # Runs each step and looks for an output like "ok" or "divide by zero"
             _, state = step(bc, state)
             if isinstance(state, str):
-                behaviors.add(state)
+                behaviors.add(state)    # If end state is found, it breaks and takes next input
                 break
 
     for query in jpamb.QUERIES:
