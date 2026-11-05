@@ -205,6 +205,67 @@ def fuzz_small(rand, methodid, max_depth=3):
                 yield input_case
 
 
+def mutate_input(rand, input):
+    """Change every argument of an input slightly (one mutation operator each)."""
+    wrap = lambda v: (v + (1 << 31)) % (1 << 32) - (1 << 31)  # stay in JVM int range
+    mutated = []
+    for v in input.values:
+        match v:
+            case jpamb.case.Int(value):
+                new = rand.choice([value + 1, value - 1, -value, 0, value * 2])
+                mutated.append(jpamb.case.Int(wrap(new)))
+            case jpamb.case.Boolean(value):
+                mutated.append(jpamb.case.Boolean(not value))
+            case a:
+                raise NotImplementedError(f"Don't know how to mutate {a!r}")
+    return jpamb.case.Input(mutated)
+
+
+def fuzz_mutation(rand, methodid, behaviors, budget=30):
+    """Mutation-based input selection.
+
+    Start from seed inputs, then repeatedly mutate an input from the corpus.
+    An input joins the corpus when running it added a new behaviour to the
+    shared `behaviors` set (the caller fills that set after each run).
+    """
+    parameters = methodid.extension.params
+    for parameter in parameters:
+        if not isinstance(parameter, (jvm.Int, jvm.Boolean)):
+            print(f"Mutation cannot generate parameter type {parameter}", file=sys.stderr)
+            return
+
+    # Seeds: all zeros/False, plus one random input.
+    zero = jpamb.case.Input([
+        jpamb.case.Int(0) if isinstance(p, jvm.Int) else jpamb.case.Boolean(False)
+        for p in parameters
+    ])
+    corpus = [zero, fuzz_input(rand, methodid)]
+
+    # Phase 1: run the seeds.
+    for seed in corpus:
+        yield seed
+
+    if not parameters:          # nothing to mutate
+        return
+
+    # Phase 2: mutate inputs picked from the corpus.
+    seen = set()
+    for _ in range(budget):
+        parent = rand.choice(corpus)
+        child = mutate_input(rand, parent)
+        key = tuple(v.value for v in child.values)
+        if key in seen:
+            continue            # skip duplicate inputs
+        seen.add(key)
+
+        known = len(behaviors)
+        yield child             # caller runs it and updates `behaviors`
+        if len(behaviors) > known:      # new behaviour -> keep this input
+            corpus.append(child)
+
+
+
+
 def analyse():
     """The dynamic analysis, e.g. in this case a (dumb) fuzzer."""
 
@@ -230,6 +291,7 @@ def analyse():
     # Choose one input strategy.
     inputs = random_inputs(rand, methodid)
     # inputs = fuzz_small(rand, methodid)
+    #inputs = fuzz_mutation(rand, methodid, behaviors)
     for input in inputs:
         state = initial(bc, methodid, input)
 
