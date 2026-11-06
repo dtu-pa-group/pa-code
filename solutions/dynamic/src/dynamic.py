@@ -6,6 +6,16 @@ import jpamb
 import jvm
 import jvm.state as jvmc
 
+I32_MIN = -(1 << 31)
+I32_MAX = (1 << 31) - 1
+INTERESTING_INTS = (0, 1, -1, I32_MIN, I32_MAX)
+TEXT_ALPHABET = "abcdefghijklmnopqrstuvwxyz"
+MAX_SEQUENCE_LENGTH = 8
+
+
+class UnsupportedInputType(NotImplementedError):
+    """Raised when the random generator cannot represent a JVM parameter."""
+
 
 def binary(op, v1: int, v2: int) -> int | str:
     match op:
@@ -141,27 +151,65 @@ def interpret():
             break
 
 
+def fuzz_int(rand: random.Random) -> int:
+    """Generate a JVM int, with useful boundary values sampled frequently."""
+    if rand.random() < 0.5:
+        return rand.choice(INTERESTING_INTS)
+    return rand.randint(I32_MIN, I32_MAX)
+
+
+def fuzz_text(rand: random.Random) -> str:
+    """Generate a small string that is safe for JPAMB's input encoding."""
+    length = rand.randint(0, MAX_SEQUENCE_LENGTH)
+    return "".join(rand.choice(TEXT_ALPHABET) for _ in range(length))
+
+
+def fuzz_value(rand: random.Random, parameter: jvm.Type) -> jpamb.case.Value:
+    """Generate one JPAMB value matching a JVM parameter type."""
+    match parameter:
+        case jvm.Int():
+            return jpamb.case.Int(fuzz_int(rand))
+        case jvm.Boolean():
+            return jpamb.case.Boolean(rand.choice((False, True)))
+        case jvm.Array(contains=jvm.Int()):
+            length = rand.randint(0, MAX_SEQUENCE_LENGTH)
+            values = tuple(fuzz_int(rand) for _ in range(length))
+            return jpamb.case.Array(jvm.Int(), values)
+        case jvm.Array(contains=jvm.Char()):
+            return jpamb.case.Array(jvm.Char(), tuple(fuzz_text(rand)))
+        case jvm.Object(name=jvm.ClassName("java.lang.String")):
+            return jpamb.case.String(fuzz_text(rand))
+        case unsupported:
+            raise UnsupportedInputType(
+                f"Don't know how to create a random value for {unsupported!r}"
+            )
+
+
 def fuzz_input(rand: random.Random, methodid: jvm.AbsMethodID) -> jpamb.case.Input:
-    input = []
-    # 1. come up with possible inputs
-    for p in methodid.extension.params:
-        match p:
-            case jvm.Int():
-                input.append(jpamb.case.Int(rand.randint(-(1 << 31), 1 << 31)))
-            case jvm.Boolean():
-                input.append(jpamb.case.Boolean(1 == rand.randint(0, 1)))
-            case a:
-                raise NotImplementedError(
-                    "Don't know how to create random values for {input}"
-                )
-
-    return jpamb.case.Input(input)
+    """Generate one well-typed random input for a method."""
+    values = tuple(fuzz_value(rand, p) for p in methodid.extension.params)
+    return jpamb.case.Input(values)
 
 
-def random_inputs(rand, methodid):
-    """Supply the ten trials used by the random fuzzer."""
-    for trial in range(10):
+def random_inputs(rand, methodid, trials=10):
+    """Supply the requested number of trials used by the random fuzzer."""
+    if trials < 0:
+        raise ValueError("trials must be zero or greater")
+
+    for _ in range(trials):
         yield fuzz_input(rand, methodid)
+
+
+def execute_input(bc, methodid, input, max_steps):
+    """Execute one input and return its behavior or a bounded timeout."""
+    state = initial(bc, methodid, input)
+
+    for _ in range(max_steps):
+        _, state = step(bc, state)
+        if isinstance(state, str):
+            return state
+
+    return "*"
 
 
 def fuzz_small(rand, methodid, max_depth=3):
@@ -172,9 +220,12 @@ def fuzz_small(rand, methodid, max_depth=3):
     parameters = methodid.extension.params
     for parameter in parameters:
         if not isinstance(parameter, (jvm.Int, jvm.Boolean)):
-            print(f"SmallCheck cannot generate parameter type {parameter}", file=sys.stderr)
+            print(
+                f"SmallCheck cannot generate parameter type {parameter}",
+                file=sys.stderr,
+            )
             return
-        
+
     # Initialize with 0, or with True and False
     integers = [jpamb.case.Int(0)]
     booleans = [jpamb.case.Boolean(False), jpamb.case.Boolean(True)]
@@ -187,12 +238,14 @@ def fuzz_small(rand, methodid, max_depth=3):
         choices_by_parameter = []
         for parameter in parameters:
             if isinstance(parameter, jvm.Int):
-                choices_by_parameter.append(integers)   # In the first run, 0 is appended
+                choices_by_parameter.append(integers)  # In the first run, 0 is appended
             else:
-                choices_by_parameter.append(booleans)   # In the first run, True and False is appended
+                choices_by_parameter.append(
+                    booleans
+                )  # In the first run, True and False is appended
 
         # Pick one value per parameter, in method-signature order.
-        for arguments in product(*choices_by_parameter): # Can be (0, False), (0, True)
+        for arguments in product(*choices_by_parameter):  # Can be (0, False), (0, True)
             # Boolean-only and empty argument lists have depth zero.
             argument_depth = 0
             for argument in arguments:
@@ -231,21 +284,24 @@ def fuzz_mutation(rand, methodid, behaviors, budget=30):
     parameters = methodid.extension.params
     for parameter in parameters:
         if not isinstance(parameter, (jvm.Int, jvm.Boolean)):
-            print(f"Mutation cannot generate parameter type {parameter}", file=sys.stderr)
+            print(
+                f"Mutation cannot generate parameter type {parameter}", file=sys.stderr
+            )
             return
 
     # Seeds: all zeros/False, plus one random input.
-    zero = jpamb.case.Input([
-        jpamb.case.Int(0) if isinstance(p, jvm.Int) else jpamb.case.Boolean(False)
-        for p in parameters
-    ])
+    zero = jpamb.case.Input(
+        [
+            jpamb.case.Int(0) if isinstance(p, jvm.Int) else jpamb.case.Boolean(False)
+            for p in parameters
+        ]
+    )
     corpus = [zero, fuzz_input(rand, methodid)]
 
     # Phase 1: run the seeds.
-    for seed in corpus:
-        yield seed
+    yield from corpus
 
-    if not parameters:          # nothing to mutate
+    if not parameters:  # nothing to mutate
         return
 
     # Phase 2: mutate inputs picked from the corpus.
@@ -255,15 +311,13 @@ def fuzz_mutation(rand, methodid, behaviors, budget=30):
         child = mutate_input(rand, parent)
         key = tuple(v.value for v in child.values)
         if key in seen:
-            continue            # skip duplicate inputs
+            continue  # skip duplicate inputs
         seen.add(key)
 
         known = len(behaviors)
-        yield child             # caller runs it and updates `behaviors`
-        if len(behaviors) > known:      # new behaviour -> keep this input
+        yield child  # caller runs it and updates `behaviors`
+        if len(behaviors) > known:  # new behaviour -> keep this input
             corpus.append(child)
-
-
 
 
 def analyse():
@@ -273,7 +327,7 @@ def analyse():
         "dynamic",
         "1.0",
         "Los Pollos Hermanos",
-        ["dynamic", "python"],
+        ["dynamic", "random", "python"],
         for_science=True,
     )
 
@@ -282,8 +336,6 @@ def analyse():
 
     MAX_STEPS = 200
 
-    import random
-
     # Make the randomness deterministic
     rand = random.Random(0)
 
@@ -291,15 +343,14 @@ def analyse():
     # Choose one input strategy.
     inputs = random_inputs(rand, methodid)
     # inputs = fuzz_small(rand, methodid)
-    #inputs = fuzz_mutation(rand, methodid, behaviors)
-    for input in inputs:
-        state = initial(bc, methodid, input)
-
-        for x in range(MAX_STEPS):  # Runs each step and looks for an output like "ok" or "divide by zero"
-            _, state = step(bc, state)
-            if isinstance(state, str):
-                behaviors.add(state)    # If end state is found, it breaks and takes next input
-                break
+    # inputs = fuzz_mutation(rand, methodid, behaviors)
+    try:
+        for input in inputs:
+            behaviors.add(execute_input(bc, methodid, input, MAX_STEPS))
+    except UnsupportedInputType as error:
+        # One unsupported signature should not prevent JPAMB from evaluating the
+        # analyzer on the remaining methods.
+        print(error, file=sys.stderr)
 
     for query in jpamb.QUERIES:
         if query in behaviors:
