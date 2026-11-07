@@ -71,14 +71,24 @@ def test_signset_arithmetic(
 
 def compare(opr, x, y):
     match opr:
+        case jvm.CmpOpr.Eq:
+            return x.value == y.value
+        case jvm.CmpOpr.Ne:
+            return x.value != y.value
+        case jvm.CmpOpr.Lt:
+            return x.value < y.value
         case jvm.CmpOpr.Le:
             return x.value <= y.value
+        case jvm.CmpOpr.Gt:
+            return x.value > y.value
+        case jvm.CmpOpr.Ge:
+            return x.value >= y.value
         case _:
             raise NotImplementedError("TODO")
 
 
 @given(
-    st.sampled_from([jvm.CmpOpr.Le]),
+    st.sampled_from(list(jvm.CmpOpr)),
     st.sets(st_stack_ints()),
     st.sets(
         st_stack_ints(),
@@ -124,3 +134,22 @@ def test_interval_is_lattice(a: ab.Interval, b: ab.Interval, c: ab.Interval):
 @given(st.sets(st_stack_ints()), st_interval())
 def test_lnterval_is_galoi(a: set[jvms.StackInt], b: ab.Interval):
     ab.is_galoi(a, b)
+
+
+@pytest.mark.parametrize("operation", list(jvm.CmpOpr))
+def test_signset_compare_all_sign_combinations(operation):
+    # Two representatives of each nonzero sign exercise <, == and >.
+    values = [jvms.StackInt(value) for value in (-2, -1, 0, 1, 2)]
+    sign_sets = []
+    for mask in range(8):
+        signs = frozenset(sign for bit, sign in enumerate((-1, 0, 1)) if mask & (1 << bit))
+        sign_sets.append(ab.SignSet(signs))
+
+    for left in sign_sets:
+        for right in sign_sets:
+            expected = {
+                compare(operation, x, y)
+                for x in values if x in left
+                for y in values if y in right
+            }
+            assert set(left.compare(right, operation)) == expected
