@@ -153,7 +153,7 @@ def to_sign(value: jvms.StackValue) -> Sign:
             raise NotImplementedError(f"Unsupported value {value!r}")
 
 
-@dataclass(frozen=True, order=True)
+@dataclass(frozen=True)
 class SignSet(Abstraction, Lattice):
     signs: frozenset[Sign]
 
@@ -178,7 +178,7 @@ class SignSet(Abstraction, Lattice):
         return to_sign(value) in self.signs
 
     @classmethod
-    def top(cls) -> bool:
+    def top(cls) -> Self:
         return cls(frozenset([-1, 0, 1]))
 
     def __or__(self, other: "SignSet") -> "SignSet":
@@ -193,45 +193,108 @@ class SignSet(Abstraction, Lattice):
 
         return SignSet(self.signs & other.signs)
 
+    # Ordering describes inclusion of possibilities, not numeric magnitude.
+    def __lt__(self, other: "SignSet") -> bool:
+        if not isinstance(other, SignSet):
+            return NotImplemented
+        return self.signs < other.signs
+
+    def __gt__(self, other: "SignSet") -> bool:
+        if not isinstance(other, SignSet):
+            return NotImplemented
+        return self.signs > other.signs
+
     def arithmetic(
         self, other: "SignSet", opr: jvm.BinaryOpr
     ) -> tuple["SignSet", set[str]]:
-        match opr:
-            case jvm.BinaryOpr.Add:
-                output = set()
-                if 1 in self.signs:
-                    output.add(1)
-                    if -1 in other.signs:
-                        output.update([0, -1])
+        output = set()
+        errors = set()
 
-                if -1 in self.signs:
-                    output.add(-1)
-                    if 1 in other.signs:
-                        output.update([0, 1])
+        # Each pair represents all Java integers with those two signs.
+        # Empty operands produce no pairs, so their result stays empty.
+        for left in self.signs:
+            for right in other.signs:
+                match opr:
+                    case jvm.BinaryOpr.Add:
+                        if left == 0:
+                            output.add(right)
+                        elif right == 0:
+                            output.add(left)
+                        else:
+                            # Overflow prevents assuming that equal signs stay equal.
+                            output.update([-1, 0, 1])
 
-                if 0 in self.signs:
-                    output.update(other.signs)
+                    case jvm.BinaryOpr.Sub:
+                        if right == 0:
+                            output.add(left)
+                        elif left == 0:
+                            output.add(-right)
+                            if right == -1:
+                                # Negating Integer.MIN_VALUE still gives a negative.
+                                output.add(-1)
+                        else:
+                            output.update([-1, 0, 1])
 
-                return (SignSet(output), set())
-            case _:
-                raise NotImplementedError(f"TODO: {opr}")
+                    case jvm.BinaryOpr.Mul:
+                        if left == 0 or right == 0:
+                            output.add(0)
+                        else:
+                            # Multiplication may overflow to any sign, including zero.
+                            output.update([-1, 0, 1])
+
+                    case jvm.BinaryOpr.Div:
+                        if right == 0:
+                            errors.add("divide by zero")
+                        elif left == 0:
+                            output.add(0)
+                        else:
+                            # Java truncates towards zero: 1 / 2 is zero.
+                            output.add(0)
+                            output.add(left * right)
+                            if left == -1 and right == -1:
+                                # Integer.MIN_VALUE / -1 overflows to Integer.MIN_VALUE.
+                                output.add(-1)
+
+                    case jvm.BinaryOpr.Rem:
+                        if right == 0:
+                            errors.add("divide by zero")
+                        else:
+                            # A nonzero remainder has the dividend's sign.
+                            output.add(0)
+                            output.add(left)
+
+                    case _:
+                        raise NotImplementedError(f"Unsupported arithmetic: {opr}")
+
+        return SignSet(frozenset(output)), errors
 
     def compare(self, other: "SignSet", opr: jvm.CmpOpr) -> Iterable[bool]:
-        match opr:
-            case jvm.CmpOpr.Le:
-                cases = set()
-                for x in self.signs:
-                    for y in other.signs:
-                        if x == 0 or y == 0:
-                            cases.add(x <= y)
-                            continue
-                        if x <= y:
-                            cases.add(True)
-                        if x >= y:
-                            cases.add(False)
-                return cases
-            case _:
-                raise NotImplementedError(f"TODO: {opr}")
+        cases = set()
+        for left in self.signs:
+            for right in other.signs:
+                # Two positive (or two negative) values may be equal or differ
+                # in either direction. Signs alone cannot decide the comparison.
+                if left == right and left != 0:
+                    cases.update([True, False])
+                    continue
+
+                # Different signs, or two zeros, determine the answer exactly.
+                match opr:
+                    case jvm.CmpOpr.Eq:
+                        cases.add(left == right)
+                    case jvm.CmpOpr.Ne:
+                        cases.add(left != right)
+                    case jvm.CmpOpr.Lt:
+                        cases.add(left < right)
+                    case jvm.CmpOpr.Le:
+                        cases.add(left <= right)
+                    case jvm.CmpOpr.Gt:
+                        cases.add(left > right)
+                    case jvm.CmpOpr.Ge:
+                        cases.add(left >= right)
+                    case _:
+                        raise NotImplementedError(f"Unsupported comparison: {opr}")
+        return cases
 
 
 from collections.abc import Iterable
