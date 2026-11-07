@@ -65,3 +65,50 @@ def test_boolean_initialization(monkeypatch):
     states = static.initialstate(bytecode, method, None)
     state = next(iter(states.values()))
     assert state.locals[0] == SignSet.from_sign("0+")
+
+
+def test_integer_instruction_handlers():
+    jvm = static.jvm
+    method = jpamb.parse_methodid("Example.test:(I)I")
+    pc = static.PC(method, 0)
+    positive = SignSet.from_sign("+")
+    negative = SignSet.from_sign("-")
+    zero = SignSet.from_sign("0")
+
+    def successors(instruction, state):
+        return list(static.manystep({pc: instruction}, pc, state))
+
+    stored = successors(
+        jvm.Store(offset=0, type=jvm.Int(), index=0),
+        static.State((zero,), (positive,)),
+    )
+    assert stored == [(pc + 1, static.State((positive,), ()))]
+
+    incremented = successors(
+        jvm.Incr(offset=0, index=0, amount=-1),
+        static.State((zero,), ()),
+    )
+    assert incremented == [(pc + 1, static.State((negative,), ()))]
+
+    negated = successors(
+        jvm.Negate(offset=0, type=jvm.Int()),
+        static.State((), (positive,)),
+    )
+    assert negated == [(pc + 1, static.State((), (negative,)))]
+
+    comparison = jvm.If(offset=0, condition=jvm.CmpOpr.Lt, target=5)
+    assert successors(comparison, static.State((), (negative, positive))) == [
+        (pc % 5, static.State((), ()))
+    ]
+    assert successors(comparison, static.State((), (positive, negative))) == [
+        (pc + 1, static.State((), ()))
+    ]
+    uncertain = successors(comparison, static.State((), (positive, positive)))
+    assert {position for position, state in uncertain} == {pc + 1, pc % 5}
+
+
+def test_loop_with_local_variable(run_analysis):
+    predictions = run_analysis("jpamb.cases.Loops.neverDivides:()I")
+    assert predictions["divide by zero"] == "no"
+    assert predictions["ok"] == "no"
+    assert predictions["*"] == "unknown"

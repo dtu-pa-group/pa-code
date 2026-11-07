@@ -93,6 +93,29 @@ def manystep(
             va = state.load(i)
             yield (pc + 1, state.push(va))
 
+        case jvm.Store(type=jvm.Int(), index=index):
+            [value], after = state.pop(1)
+            yield (pc + 1, after.store(index, value))
+
+        case jvm.If(condition=operation, target=target):
+            [left, right], after = state.pop(2)
+            for answer in left.compare(right, operation):
+                if answer:
+                    yield (pc % target, after)
+                else:
+                    yield (pc + 1, after)
+
+        case jvm.Incr(index=index, amount=amount):
+            increment = SignSet.abstract([StackInt(amount)])
+            result, _errors = state.load(index).arithmetic(increment, jvm.BinaryOpr.Add)
+            yield (pc + 1, state.store(index, result))
+
+        case jvm.Negate(type=jvm.Int()):
+            [value], after = state.pop(1)
+            zero = SignSet.abstract([StackInt(0)])
+            result, _errors = zero.arithmetic(value, jvm.BinaryOpr.Sub)
+            yield (pc + 1, after.push(result))
+
         case jvm.Goto(target=t):
             yield (pc % t, state)
 
@@ -197,8 +220,8 @@ def interpret():
     methodid, input, steps = jpamb.getcase(
         "static",
         "1.0",
-        "The Rice Theorem Cookers",
-        ["static", "python"],
+        "Los Pollos Hermanos",
+        ["static", "sign", "python"],
         for_science=True,
     )
     suite, eff = jpamb.setup()
@@ -224,8 +247,8 @@ def analyse():
     methodid = jpamb.getmethodid(
         "static",
         "1.0",
-        "The Rice Theorem Cookers",
-        ["static", "python"],
+        "Los Pollos Hermanos",
+        ["static", "sign", "python"],
         for_science=True,
     )
 
