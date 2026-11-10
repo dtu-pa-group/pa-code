@@ -8,7 +8,7 @@ import jvm.state as jvms
 
 
 def st_i32():
-    return st.integers(min_value=-(2**31) - 1, max_value=2**31)
+    return st.integers(min_value=-(2**31), max_value=2**31 - 1)
 
 
 def st_u32():
@@ -45,40 +45,86 @@ def test_signset_is_galoi(a: set[jvms.StackInt], b: ab.SignSet):
 
 
 def arithmetic(opr, x, y):
+    left, right = x.value, y.value
     match opr:
         case jvm.BinaryOpr.Add:
-            return jvms.StackInt(x.value + y.value)
-        case _:
-            raise NotImplementedError("TODO")
+            value = left + right
+        case jvm.BinaryOpr.Sub:
+            value = left - right
+        case jvm.BinaryOpr.Mul:
+            value = left * right
+        case jvm.BinaryOpr.Div | jvm.BinaryOpr.Rem:
+            quotient = abs(left) // abs(right)
+            if (left < 0) != (right < 0):
+                quotient = -quotient
+            if opr == jvm.BinaryOpr.Div:
+                value = quotient
+            else:
+                value = left - quotient * right
+    # Java int results wrap to the signed 32-bit range.
+    return jvms.StackInt((value + 2**31) % 2**32 - 2**31)
 
 
 @given(
-    st.sampled_from([jvm.BinaryOpr.Add]),
+    st.sampled_from(list(jvm.BinaryOpr)),
     st.sets(st_stack_ints()),
-    st.sets(
-        st_stack_ints(),
-    ),
+    st.sets(st_stack_ints()),
 )
-def test_signset_arithmetic(
-    opr: jvm.BinaryOpr, xs: set[jvms.StackInt], ys: set[jvms.StackInt]
-):
-    real = ab.SignSet.abstract(arithmetic(opr, x, y) for x in xs for y in ys)
-    (abstracted, _errs) = ab.SignSet.abstract(xs).arithmetic(
-        ab.SignSet.abstract(ys), opr
-    )
-    assert real <= abstracted
+def test_signset_arithmetic(opr, xs, ys):
+    expected_values = []
+    expected_errors = set()
+    for left in xs:
+        for right in ys:
+            try:
+                expected_values.append(arithmetic(opr, left, right))
+            except ZeroDivisionError:
+                expected_errors.add("divide by zero")
+    result, errors = ab.SignSet.abstract(xs).arithmetic(ab.SignSet.abstract(ys), opr)
+    assert ab.SignSet.abstract(expected_values) <= result
+    assert errors == expected_errors
+
+
+@pytest.mark.parametrize("operation", list(jvm.BinaryOpr))
+def test_arithmetic_boundaries_and_empty_sets(operation):
+    values = [-2**31, -2**31 + 1, -65536, -2, -1, 0, 1, 2, 65536, 2**31 - 1]
+    for left in values:
+        for right in values:
+            x, y = jvms.StackInt(left), jvms.StackInt(right)
+            result, errors = ab.SignSet.abstract([x]).arithmetic(
+                ab.SignSet.abstract([y]), operation
+            )
+            try:
+                expected = arithmetic(operation, x, y)
+            except ZeroDivisionError:
+                assert errors == {"divide by zero"}
+                assert result == ab.SignSet.bot()
+            else:
+                assert expected in result
+                assert errors == set()
+    assert ab.SignSet.bot().arithmetic(ab.SignSet.top(), operation) == (ab.SignSet.bot(), set())
+    assert ab.SignSet.top().arithmetic(ab.SignSet.bot(), operation) == (ab.SignSet.bot(), set())
 
 
 def compare(opr, x, y):
     match opr:
+        case jvm.CmpOpr.Eq:
+            return x.value == y.value
+        case jvm.CmpOpr.Ne:
+            return x.value != y.value
+        case jvm.CmpOpr.Lt:
+            return x.value < y.value
         case jvm.CmpOpr.Le:
             return x.value <= y.value
+        case jvm.CmpOpr.Gt:
+            return x.value > y.value
+        case jvm.CmpOpr.Ge:
+            return x.value >= y.value
         case _:
             raise NotImplementedError("TODO")
 
 
 @given(
-    st.sampled_from([jvm.CmpOpr.Le]),
+    st.sampled_from(list(jvm.CmpOpr)),
     st.sets(st_stack_ints()),
     st.sets(
         st_stack_ints(),
@@ -124,3 +170,22 @@ def test_interval_is_lattice(a: ab.Interval, b: ab.Interval, c: ab.Interval):
 @given(st.sets(st_stack_ints()), st_interval())
 def test_lnterval_is_galoi(a: set[jvms.StackInt], b: ab.Interval):
     ab.is_galoi(a, b)
+
+
+@pytest.mark.parametrize("operation", list(jvm.CmpOpr))
+def test_signset_compare_all_sign_combinations(operation):
+    # Two representatives of each nonzero sign exercise <, == and >.
+    values = [jvms.StackInt(value) for value in (-2, -1, 0, 1, 2)]
+    sign_sets = []
+    for mask in range(8):
+        signs = frozenset(sign for bit, sign in enumerate((-1, 0, 1)) if mask & (1 << bit))
+        sign_sets.append(ab.SignSet(signs))
+
+    for left in sign_sets:
+        for right in sign_sets:
+            expected = {
+                compare(operation, x, y)
+                for x in values if x in left
+                for y in values if y in right
+            }
+            assert set(left.compare(right, operation)) == expected
