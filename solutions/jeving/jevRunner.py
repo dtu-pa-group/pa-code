@@ -29,13 +29,6 @@ QUESTIONS = {
                 "Use if the method takes a String and relies on .equals() or string comparisons. "
                 "Requires --abstractions string."
             ),
-            "syntactic_treesitter": (
-                "Use for a fast check to see if an 'assert' statement exists in the source code "
-                "without running any math."
-            ),
-            "syntactic_bytecode": (
-                "Use as a fast fallback to check for AssertionError in the compiled bytecode."
-            ),
             "dynamic_random": (
                 "Use if the method takes arrays, strings, or complex types and requires "
                 "concrete fuzzing to trigger a crash."
@@ -96,14 +89,6 @@ ANALYZERS = [
     {
         "name": "static_string",
         "supports": ["String", "boolean"],
-    },
-    {
-        "name": "syntactic_treesitter",
-        "supports": ["assert", "ast"],
-    },
-    {
-        "name": "syntactic_bytecode",
-        "supports": ["assert", "bytecode"],
     },
     {
         "name": "dynamic_random",
