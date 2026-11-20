@@ -1,0 +1,26 @@
+{
+  "method_id": "jpamb.cases.Calls.callsAssertTrue",
+  "source_file": "jpamb.cases.Calls.callsAssertTrue.json",
+  "answers": {
+    "primary_analyzer": {
+      "type": "choice",
+      "selected": "dynamic_small",
+      "probabilities_percent": {
+        "static_sign": 42.0,
+        "static_interval": 2.0,
+        "static_string": 1.0,
+        "dynamic_random": 2.0,
+        "dynamic_small": 50.0,
+        "dynamic_mutation": 3.0
+      }
+    },
+    "use_dictionary": {
+      "type": "noul",
+      "yes_probability_percent": 8.0
+    },
+    "run_secondary_static": {
+      "type": "noul",
+      "yes_probability_percent": 14.0
+    }
+  }
+}

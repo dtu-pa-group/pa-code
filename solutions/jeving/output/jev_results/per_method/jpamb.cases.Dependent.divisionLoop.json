@@ -1,0 +1,26 @@
+{
+  "method_id": "jpamb.cases.Dependent.divisionLoop",
+  "source_file": "jpamb.cases.Dependent.divisionLoop.json",
+  "answers": {
+    "primary_analyzer": {
+      "type": "choice",
+      "selected": "static_interval",
+      "probabilities_percent": {
+        "static_sign": 10.0,
+        "static_interval": 71.0,
+        "static_string": 0.0,
+        "dynamic_random": 0.0,
+        "dynamic_small": 6.0,
+        "dynamic_mutation": 13.0
+      }
+    },
+    "use_dictionary": {
+      "type": "noul",
+      "yes_probability_percent": 45.0
+    },
+    "run_secondary_static": {
+      "type": "noul",
+      "yes_probability_percent": 83.0
+    }
+  }
+}

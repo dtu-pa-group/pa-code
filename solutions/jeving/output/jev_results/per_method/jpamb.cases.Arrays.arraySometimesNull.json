@@ -1,0 +1,26 @@
+{
+  "method_id": "jpamb.cases.Arrays.arraySometimesNull",
+  "source_file": "jpamb.cases.Arrays.arraySometimesNull.json",
+  "answers": {
+    "primary_analyzer": {
+      "type": "choice",
+      "selected": "static_interval",
+      "probabilities_percent": {
+        "static_sign": 2.0,
+        "static_interval": 44.0,
+        "static_string": 0.0,
+        "dynamic_random": 35.0,
+        "dynamic_small": 8.0,
+        "dynamic_mutation": 11.0
+      }
+    },
+    "use_dictionary": {
+      "type": "noul",
+      "yes_probability_percent": 49.0
+    },
+    "run_secondary_static": {
+      "type": "noul",
+      "yes_probability_percent": 34.0
+    }
+  }
+}
