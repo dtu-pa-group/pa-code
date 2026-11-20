@@ -1,0 +1,34 @@
+{
+  "objective": "Select the analysis technique or combination of techniques that best fits this Java test method. Use only the supplied analysis catalogue and each technique's selection criteria. Base the decision on the implementation, @Case inputs/behaviors, and relevant helper code; do not infer behavior from the method name alone or invent analysis techniques.",
+  "case_semantics": "The @Case annotations are exhaustive: they enumerate the method's possible input/behavior cases. A behavior not listed by the annotations is not possible.",
+  "state": {
+    "id": "jpamb.cases.Calls.callsAssertIfWithTrue",
+    "source": "public static void callsAssertIfWithTrue() {\n    assertIf(true);\n  }",
+    "cases": [
+      {
+        "input": "()",
+        "expected": "ok"
+      }
+    ],
+    "tags": [
+      "CALL"
+    ],
+    "helpers": [
+      {
+        "id": "jpamb.cases.Calls.assertIf",
+        "source": "public static void assertIf(boolean test) {\n    if (test) {\n      assertTrue();\n    } else {\n      assertFalse();\n    }\n  }"
+      },
+      {
+        "id": "jpamb.cases.Calls.assertTrue",
+        "source": "public static void assertTrue() {\n    assert true;\n  }"
+      },
+      {
+        "id": "jpamb.cases.Calls.assertFalse",
+        "source": "public static void assertFalse() {\n    assert false;\n  }"
+      }
+    ],
+    "imports": [
+      "import static jpamb.utils.Tag.TagType.*;"
+    ]
+  }
+}
