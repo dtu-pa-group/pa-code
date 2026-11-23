@@ -18,6 +18,92 @@ timeout is uncertainty about termination, not proof that a method runs forever.
 Use WSL/Bash from the repository root. For a fresh machine, follow
 [setup](docs/setup.md) to prepare the Java benchmark and dependencies first.
 
+### Mix analyses with the engine
+
+`engine.py` runs any selection of the existing techniques independently and
+combines their predictions for each method. It does not change Jev or the
+individual technique implementations. Use Python 3.13+ and the built benchmark:
+
+```bash
+cd /home/sweet/project_PA/pa-code
+source .venv/bin/activate
+# Install dependencies if needed:
+uv pip install -e . -e solutions/static -e solutions/dynamic pytest hypothesis
+
+# One technique across the suite:
+jpamb analyse -- python engine.py --analyses static_sign
+
+# A mixed selection across the suite:
+jpamb analyse -- python engine.py --analyses static_sign,static_string,dynamic_small
+
+# All six techniques:
+jpamb analyse -- python engine.py --analyses static_sign,static_string,static_int,dynamic_random,dynamic_small,dynamic_mutation
+
+# Quick comparison on a subset:
+jpamb analyse --filter Simple --iterations 1 -- python engine.py --analyses static_int,dynamic_random
+
+# One method directly, without suite scoring:
+python engine.py --analyses static_sign,dynamic_small 'jpamb.cases.Simple.divideByN:(I)I'
+
+# Check JPAMB metadata:
+python engine.py --analyses static_sign,dynamic_small info
+
+# Save a full-suite report using the default three iterations:
+mkdir -p reports
+jpamb analyse --report reports/engine.sexp -- python engine.py --analyses static_sign,dynamic_small
+```
+
+Available names are `static_sign`, `static_string`, `static_int` (interval),
+`dynamic_random`, `dynamic_small`, and `dynamic_mutation`. `static_interval` is
+also accepted as an alias. Any combination and any order work; duplicates run
+only once. Keep the comma-separated list in one shell argument: omit spaces or
+quote the whole list, such as `--analyses "static_sign, dynamic_small"`.
+
+The engine intersects static possibilities and unions dynamic observations:
+
+1. Any concrete dynamic witness gives `yes`. If static analysis excluded that
+   behavior, the engine also logs the disagreement to stderr.
+2. Otherwise, a static exclusion gives `no`.
+3. A dynamic `no` is accepted only with an explicit complete-execution guarantee.
+   None of the current fuzzers provides one.
+4. All other cases give `maybe`. Not-found and timeout do not prove absence;
+   timeout does not prove nontermination.
+
+Each static domain runs separately, rather than cooperating within a single
+abstract interpretation. Each fuzzer uses seed 0 and its own observations;
+mutation feedback is local to its run. Existing technique budgets are retained,
+so selecting more techniques increases total work.
+
+The direct method command writes exactly one `outcome;result` line for each of
+JPAMB's six queries. JPAMB's `analyse` command invokes the engine for every
+selected benchmark method, compares predictions with ground truth, calibrates
+the result categories, and computes the suite score. A direct engine call
+returns predictions, not a numeric score.
+
+For your teammate's future Jev integration, the Python interface is:
+
+```python
+from engine import run
+
+selected = ["static_sign", "static_string", "dynamic_small"]
+behaviors = run(selected, "jpamb.cases.Simple.divideByN:(I)I")
+```
+
+Jev will supply `selected` and the current method identifier. `run()` returns
+the combined dictionary; an analyzer entry point can use `engine.emit(behaviors)`
+to send it to JPAMB. Jev's selection and method-passing code remain your
+teammate's responsibility and are not changed by this integration.
+
+Run the engine tests with:
+
+```bash
+python -m pytest tests/test_engine.py tests/test_engine_integration.py -q
+```
+
+See the [engine guide](information/engine.md) for the full API, scoring details,
+and registration of future techniques such as `dynamic_coverage`. Coverage
+fuzzing must be implemented and registered before that name can be selected.
+
 ### Run a dynamic fuzzer
 
 ```bash
