@@ -1,0 +1,78 @@
+{
+  "state": {
+    "analyzers": [
+      {
+        "name": "static_sign",
+        "command": "static.py --abstractions sign",
+        "supports": ["int", "boolean"]
+      },
+      {
+        "name": "static_interval",
+        "command": "static.py --abstractions interval",
+        "supports": ["int", "boolean"]
+      },
+      {
+        "name": "static_string",
+        "command": "static.py --abstractions string",
+        "supports": ["String", "boolean"]
+      },
+      {
+        "name": "syntactic_treesitter",
+        "command": "syntactic_treesitter.py",
+        "supports": ["assert", "ast"]
+      },
+      {
+        "name": "syntactic_bytecode",
+        "command": "syntactic_bytecode.py",
+        "supports": ["assert", "bytecode"]
+      },
+      {
+        "name": "dynamic_random",
+        "command": "dynamic.py --random",
+        "supports": ["int", "boolean", "int[]", "char[]", "String"]
+      },
+      {
+        "name": "dynamic_small",
+        "command": "dynamic.py --small",
+        "supports": ["int", "boolean"]
+      },
+      {
+        "name": "dynamic_mutation",
+        "command": "dynamic.py --mutation",
+        "supports": ["int", "boolean"]
+      }
+    ]
+  },
+  "questions": {
+    "primary_analyzer": {
+      "type": "choice",
+      "instructions": "Select the single best analyzer configuration for this Java method based on its input types, helpers, and structural features.",
+      "criteria": {
+        "static_sign": "Use for simple integer math, division by zero, or sign comparisons. Fails if the method uses strings.",
+        "static_interval": "Use for complex integer math requiring precise bounds (e.g., array indices, loops). Fails if the method uses strings.",
+        "static_string": "Use if the method takes a String and relies on .equals() or string comparisons. (Requires --abstractions string).",
+        "syntactic_treesitter": "Use for a fast check to see if an 'assert' statement exists in the source code without running any math.",
+        "syntactic_bytecode": "Use as a fast fallback to check for AssertionError in the compiled bytecode.",
+        "dynamic_random": "Use if the method takes arrays, strings, or complex types and requires concrete fuzzing to trigger a crash.",
+        "dynamic_small": "Use ONLY if the method takes integers or booleans and you want to exhaustively test small values.",
+        "dynamic_mutation": "Use ONLY if the method takes integers or booleans and you want to mutate a seed input to find edge cases."
+      }
+    },
+    "use_dictionary": {
+      "type": "noul",
+      "instructions": "Are there specific string or character literals, or meaningful constants, that should be used as targeted fuzzer seeds?",
+      "criteria": {
+        "true": "A relevant literal influences a condition, assertion or program behavior (e.g., checking if a string equals 'hello').",
+        "false": "No relevant literal was identified, or the method does not use strings for control flow."
+      }
+    },
+    "run_secondary_static": {
+      "type": "noul",
+      "instructions": "Should we also run static_sign in the background to provide complementary 'Must' analysis alongside a dynamic fuzzer?",
+      "criteria": {
+        "true": "The method contains integer math or division, so static analysis can provide complementary proof alongside the fuzzer.",
+        "false": "The method is purely string/array based and static sign analysis would add no value."
+      }
+    }
+  }
+}

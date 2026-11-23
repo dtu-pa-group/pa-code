@@ -1,0 +1,26 @@
+{
+  "method_id": "jpamb.cases.Simple.divideByN",
+  "source_file": "jpamb.cases.Simple.divideByN.json",
+  "answers": {
+    "primary_analyzer": {
+      "type": "choice",
+      "selected": "static_sign",
+      "probabilities_percent": {
+        "static_sign": 73.0,
+        "static_interval": 1.0,
+        "static_string": 0.0,
+        "dynamic_random": 0.0,
+        "dynamic_small": 24.0,
+        "dynamic_mutation": 2.0
+      }
+    },
+    "use_dictionary": {
+      "type": "noul",
+      "yes_probability_percent": 16.0
+    },
+    "run_secondary_static": {
+      "type": "noul",
+      "yes_probability_percent": 91.0
+    }
+  }
+}

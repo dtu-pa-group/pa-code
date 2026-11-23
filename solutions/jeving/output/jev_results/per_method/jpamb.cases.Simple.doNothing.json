@@ -1,0 +1,26 @@
+{
+  "method_id": "jpamb.cases.Simple.doNothing",
+  "source_file": "jpamb.cases.Simple.doNothing.json",
+  "answers": {
+    "primary_analyzer": {
+      "type": "choice",
+      "selected": "static_sign",
+      "probabilities_percent": {
+        "static_sign": 57.0,
+        "static_interval": 3.0,
+        "static_string": 1.0,
+        "dynamic_random": 9.0,
+        "dynamic_small": 26.0,
+        "dynamic_mutation": 4.0
+      }
+    },
+    "use_dictionary": {
+      "type": "noul",
+      "yes_probability_percent": 3.0
+    },
+    "run_secondary_static": {
+      "type": "noul",
+      "yes_probability_percent": 7.0
+    }
+  }
+}

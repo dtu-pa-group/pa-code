@@ -1,0 +1,26 @@
+{
+  "method_id": "jpamb.cases.Simple.checkBeforeAssert",
+  "source_file": "jpamb.cases.Simple.checkBeforeAssert.json",
+  "answers": {
+    "primary_analyzer": {
+      "type": "choice",
+      "selected": "static_sign",
+      "probabilities_percent": {
+        "static_sign": 85.0,
+        "static_interval": 1.0,
+        "static_string": 0.0,
+        "dynamic_random": 0.0,
+        "dynamic_small": 13.0,
+        "dynamic_mutation": 1.0
+      }
+    },
+    "use_dictionary": {
+      "type": "noul",
+      "yes_probability_percent": 35.0
+    },
+    "run_secondary_static": {
+      "type": "noul",
+      "yes_probability_percent": 92.0
+    }
+  }
+}

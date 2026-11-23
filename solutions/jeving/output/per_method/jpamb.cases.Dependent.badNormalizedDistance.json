@@ -1,0 +1,18 @@
+{
+  "objective": "Select the analysis technique or combination of techniques that best fits this Java test method. Use only the supplied analysis catalogue and each technique's selection criteria. Base the decision on the implementation, @Case inputs/behaviors, and relevant helper code; do not infer behavior from the method name alone or invent analysis techniques.",
+  "case_semantics": "The @Case annotations are exhaustive: they enumerate the method's possible input/behavior cases. A behavior not listed by the annotations is not possible.",
+  "state": {
+    "id": "jpamb.cases.Dependent.badNormalizedDistance",
+    "source": "public static int badNormalizedDistance(int x, int y) {\n    int dst = y - x;\n    if (x < 0) x = -x;\n    if (y < 0) y = -y;\n    if (x >= y) {\n      return dst / x;\n    } else {\n      return dst / y;\n    }\n  }",
+    "cases": [
+      {
+        "input": "(0, 0)",
+        "expected": "divide by zero"
+      },
+      {
+        "input": "(1, 1)",
+        "expected": "ok"
+      }
+    ]
+  }
+}

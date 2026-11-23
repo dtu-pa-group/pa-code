@@ -1,0 +1,26 @@
+{
+  "method_id": "jpamb.cases.Calls.callsAssertFib",
+  "source_file": "jpamb.cases.Calls.callsAssertFib.json",
+  "answers": {
+    "primary_analyzer": {
+      "type": "choice",
+      "selected": "dynamic_small",
+      "probabilities_percent": {
+        "static_sign": 2.0,
+        "static_interval": 28.0,
+        "static_string": 0.0,
+        "dynamic_random": 0.0,
+        "dynamic_small": 63.0,
+        "dynamic_mutation": 7.0
+      }
+    },
+    "use_dictionary": {
+      "type": "noul",
+      "yes_probability_percent": 19.0
+    },
+    "run_secondary_static": {
+      "type": "noul",
+      "yes_probability_percent": 71.0
+    }
+  }
+}

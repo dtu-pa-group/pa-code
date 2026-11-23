@@ -1,0 +1,26 @@
+{
+  "method_id": "jpamb.cases.Loops.neverAsserts",
+  "source_file": "jpamb.cases.Loops.neverAsserts.json",
+  "answers": {
+    "primary_analyzer": {
+      "type": "choice",
+      "selected": "static_interval",
+      "probabilities_percent": {
+        "static_sign": 15.0,
+        "static_interval": 83.0,
+        "static_string": 0.0,
+        "dynamic_random": 0.0,
+        "dynamic_small": 2.0,
+        "dynamic_mutation": 0.0
+      }
+    },
+    "use_dictionary": {
+      "type": "noul",
+      "yes_probability_percent": 12.0
+    },
+    "run_secondary_static": {
+      "type": "noul",
+      "yes_probability_percent": 52.0
+    }
+  }
+}
