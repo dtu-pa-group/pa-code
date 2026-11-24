@@ -9,10 +9,30 @@ import jvm.state as jvmc
 
 I32_MIN = -(1 << 31)
 I32_MAX = (1 << 31) - 1
-INTERESTING_INTS = (0, 1, -1, I32_MIN, I32_MAX)
+INTERESTING_INTS = (
+    0,
+    1,
+    -1,
+    2,
+    -2,
+    3,
+    -3,
+    4,
+    -4,
+    8,
+    -8,
+    16,
+    -16,
+    100,
+    -100,
+    I32_MIN,
+    I32_MAX,
+)
 TEXT_ALPHABET = "abcdefghijklmnopqrstuvwxyz"
 MAX_SEQUENCE_LENGTH = 8
 
+CURRENT_COVERAGE = set()
+PREVIOUS_PC = None
 
 class UnsupportedInputType(NotImplementedError):
     """Raised when the random generator cannot represent a JVM parameter."""
@@ -65,6 +85,11 @@ def step(bc: jpamb.Bytecode, state: jvmc.State) -> tuple[jvmc.PC, jvmc.State | s
     """Execute one supported JVM instruction; never guess unsupported semantics."""
     frame = state.frames.peek()
     pc = frame.pc
+    global CURRENT_COVERAGE
+    global PREVIOUS_PC
+
+    CURRENT_COVERAGE.add((PREVIOUS_PC, pc))
+    PREVIOUS_PC = pc
     opr = bc[pc]
     # Branch and call instructions override this default next instruction.
     frame.pc += 1
@@ -301,7 +326,7 @@ def fuzz_input(rand: random.Random, methodid: jvm.AbsMethodID) -> jpamb.case.Inp
     return jpamb.case.Input(values)
 
 
-def random_inputs(rand, methodid, trials=10):
+def random_inputs(rand, methodid, trials=200):
     """Supply the requested number of trials used by the random fuzzer."""
     if trials < 0:
         raise ValueError("trials must be zero or greater")
@@ -321,8 +346,30 @@ def execute_input(bc, methodid, input, max_steps):
 
     return "*"
 
+def execute_input_with_coverage(
+    bc,
+    methodid,
+    input,
+    max_steps,
+):
+    global CURRENT_COVERAGE
+    global PREVIOUS_PC
 
-def fuzz_small(rand, methodid, max_depth=3):
+    CURRENT_COVERAGE = set()
+    PREVIOUS_PC = None
+
+    state = initial(bc, methodid, input)
+
+    for _ in range(max_steps):
+        _, state = step(bc, state)
+
+        if isinstance(state, str):
+            return state, set(CURRENT_COVERAGE)
+
+    return "*", set(CURRENT_COVERAGE)
+
+
+def fuzz_small(rand, methodid, max_depth=6):
     """Try small arguments in order of their largest integer magnitude."""
     if max_depth < 0:
         raise ValueError("max_depth must be zero or greater")
@@ -369,19 +416,111 @@ def fuzz_small(rand, methodid, max_depth=3):
 
 
 def mutate_input(rand, input):
-    """Change every argument of an input slightly (one mutation operator each)."""
-    wrap = lambda v: (v + (1 << 31)) % (1 << 32) - (1 << 31)  # stay in JVM int range
-    mutated = []
-    for v in input.values:
-        match v:
-            case jpamb.case.Int(value):
-                new = rand.choice([value + 1, value - 1, -value, 0, value * 2])
-                mutated.append(jpamb.case.Int(wrap(new)))
-            case jpamb.case.Boolean(value):
-                mutated.append(jpamb.case.Boolean(not value))
-            case a:
-                raise NotImplementedError(f"Don't know how to mutate {a!r}")
-    return jpamb.case.Input(mutated)
+
+    wrap = lambda v: (v + (1 << 31)) % (1 << 32) - (1 << 31)
+
+    values = list(input.values)
+
+    if not values:
+        return input
+
+    idx = rand.randrange(len(values))
+
+    match values[idx]:
+
+        case jpamb.case.Int(value):
+
+            new = rand.choice([
+                value + 1,
+                value - 1,
+                -value,
+                value * 2,
+                0,
+                1,
+                -1,
+                2,
+                -2,
+                3,
+                -3,
+                I32_MIN,
+                I32_MAX,
+            ])
+
+            values[idx] = jpamb.case.Int(wrap(new))
+
+        case jpamb.case.Boolean(value):
+
+            values[idx] = jpamb.case.Boolean(not value)
+
+        case jpamb.case.String(value):
+
+            values[idx] = jpamb.case.String(
+                 rand.choice([
+                     "",
+                     "a",
+                     "aa",
+                     "aaa",
+                    "hello",
+                     value + "a",
+                     value[:-1] if value else "",
+        ])
+    )
+
+        case jpamb.case.Array(
+            contains=jvm.Int(),
+            values=vals,
+):
+
+            vals = list(vals)
+
+            if not vals:
+                 vals = [0]
+
+            choice = rand.random()
+
+            if choice < 0.3:
+                vals.append(rand.choice(INTERESTING_INTS))
+
+            elif choice < 0.6 and vals:
+                 vals.pop()
+
+            else:
+             pos = rand.randrange(len(vals))
+             vals[pos] = rand.choice(INTERESTING_INTS)
+
+            values[idx] = jpamb.case.Array(
+                jvm.Int(),
+                 tuple(vals),
+    )
+
+        case jpamb.case.Array(
+            contains=jvm.Char(),
+            values=vals,
+):
+
+            vals = list(vals)
+
+            if not vals:
+                 vals = ["a"]
+
+            choice = rand.random()
+
+            if choice < 0.3:
+                vals.append(rand.choice(["a", "b", "c", "z"]))
+
+            elif choice < 0.6 and vals:
+                 vals.pop()
+
+            else:
+                pos = rand.randrange(len(vals))
+                vals[pos] = rand.choice(["a", "b", "c", "z"])
+
+            values[idx] = jpamb.case.Array(
+                jvm.Char(),
+                tuple(vals),
+    )
+
+    return jpamb.case.Input(values)
 
 
 def fuzz_mutation(rand, methodid, behaviors, budget=30):
@@ -429,6 +568,88 @@ def fuzz_mutation(rand, methodid, behaviors, budget=30):
         if len(behaviors) > known:  # new behaviour -> keep this input
             corpus.append(child)
 
+def fuzz_coverage(
+    rand,
+    methodid,
+    bc,
+    max_steps=500,
+    budget=2000,
+):
+
+    parameters = methodid.extension.params
+
+    for parameter in parameters:
+
+        if isinstance(parameter, (jvm.Int, jvm.Boolean)):
+            continue
+
+        if isinstance(parameter, jvm.Array):
+             continue
+
+        if (
+             isinstance(parameter, jvm.Object)
+            and parameter.name
+            == jvm.ClassName("java.lang.String")
+        ):
+            continue
+
+        return
+
+    seed = fuzz_input(rand, methodid)
+
+    corpus = list(
+        fuzz_small(
+            rand,
+            methodid,
+            max_depth=8,
+        )
+    )
+
+    if not corpus:
+        corpus = [seed]
+
+    _, cov = execute_input_with_coverage(
+        bc,
+        methodid,
+        seed,
+        max_steps,
+    )
+
+    global_coverage = set(cov)
+
+    seen_behaviors = set()
+
+    yield from corpus
+
+    for _ in range(budget):
+
+        if rand.random() < 0.50:
+            child = fuzz_input(rand, methodid)
+        else:
+            parent = rand.choice(corpus)
+            child = mutate_input(rand, parent)
+
+        outcome, child_cov = execute_input_with_coverage(
+            bc,
+            methodid,
+            child,
+            max_steps,
+        )
+
+        new_behavior = outcome not in seen_behaviors
+
+        if new_behavior:
+            seen_behaviors.add(outcome)
+
+        if child_cov - global_coverage:
+
+            global_coverage |= child_cov
+            corpus.append(child)
+            if len(corpus) > 200:
+                corpus = corpus[-200:]
+
+            yield child
+
 
 def parse_options(arguments):
     """Consume fuzzer flags while retaining JPAMB's method/info protocol."""
@@ -436,14 +657,14 @@ def parse_options(arguments):
         description="Run selected dynamic fuzzers (default: --random).",
         allow_abbrev=False,
     )
-    for name in ("random", "small", "mutation"):
+    for name in ("random", "small", "mutation","coverage"):
         parser.add_argument(
             f"--{name}", action="store_true", help=f"enable the {name} fuzzer"
         )
     parser.add_argument("method", help="JPAMB method identifier, or info")
     options = parser.parse_args(arguments)
     strategies = tuple(
-        name for name in ("random", "small", "mutation") if getattr(options, name)
+        name for name in ("small","random", "mutation", "coverage") if getattr(options, name)
     ) or ("random",)
     return strategies, [options.method]
 
@@ -464,7 +685,7 @@ def analyse():
     suite, eff = jpamb.setup()
     bc = jpamb.Bytecode(suite, eff, {})
 
-    MAX_STEPS = 200
+    MAX_STEPS = 1000
 
     behaviors = set()
     unsupported = set()
@@ -476,9 +697,12 @@ def analyse():
             case "random":
                 inputs = random_inputs(rand, methodid)
             case "small":
-                inputs = fuzz_small(rand, methodid)
+                inputs = fuzz_small(rand, methodid,max_depth=6)
             case "mutation":
                 inputs = fuzz_mutation(rand, methodid, behaviors)
+
+            case "coverage":
+                inputs = fuzz_coverage(rand, methodid, bc,MAX_STEPS)
         try:
             for input in inputs:
                 try:
