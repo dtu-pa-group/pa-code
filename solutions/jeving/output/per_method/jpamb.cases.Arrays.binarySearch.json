@@ -1,25 +1,10 @@
 {
-  "objective": "Select the analysis technique or combination of techniques that best fits this Java test method. Use only the supplied analysis catalogue and each technique's selection criteria. Base the decision on the implementation, @Case inputs/behaviors, and relevant helper code; do not infer behavior from the method name alone or invent analysis techniques.",
-  "case_semantics": "The @Case annotations are exhaustive: they enumerate the method's possible input/behavior cases. A behavior not listed by the annotations is not possible.",
+  "objective": "Select the analysis technique or combination of techniques that best fits this Java test method. Use only the supplied analysis catalogue and each technique's selection criteria. Base the decision on the method implementation and relevant helper code; do not infer behavior from the method name alone or invent analysis techniques.",
   "state": {
     "id": "jpamb.cases.Arrays.binarySearch",
     "source": "public static void binarySearch(int x) {\n    int arr[] = {2, 3, 4, 10, 40};\n    int l = 0, r = arr.length - 1;\n    while (l <= r) {\n      int m = l + (r - l) / 2;\n      if (arr[m] == x) return;\n      if (arr[m] < x) l = m + 1;\n      else r = m - 1;\n    }\n    assert false;\n  }",
-    "cases": [
-      {
-        "input": "(3)",
-        "expected": "ok"
-      },
-      {
-        "input": "(6)",
-        "expected": "assertion error"
-      }
-    ],
     "tags": [
       "ARRAY"
-    ],
-    "imports": [
-      "import static jpamb.utils.Tag.TagType.*;",
-      "import jpamb.utils.*;"
     ]
   }
 }
