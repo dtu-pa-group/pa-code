@@ -2,25 +2,36 @@
   "method_id": "jpamb.cases.Calls.callsAssertFalse",
   "source_file": "jpamb.cases.Calls.callsAssertFalse.json",
   "answers": {
+    "method_understanding": {
+      "type": "choice",
+      "selected": "calls_recursion_or_cast",
+      "probabilities_percent": {
+        "calls_recursion_or_cast": 97.0,
+        "string_logic": 0.0,
+        "array_logic": 0.0,
+        "loop_logic": 0.0,
+        "numeric_or_branch_logic": 3.0
+      }
+    },
     "primary_analyzer": {
       "type": "choice",
       "selected": "dynamic_small",
       "probabilities_percent": {
-        "static_sign": 31.0,
-        "static_interval": 2.0,
-        "static_string": 1.0,
-        "dynamic_random": 2.0,
-        "dynamic_small": 59.0,
-        "dynamic_mutation": 5.0
+        "static_sign": 0.0,
+        "static_interval": 0.0,
+        "static_string": 0.0,
+        "dynamic_random": 4.0,
+        "dynamic_small": 96.0,
+        "dynamic_mutation": 0.0
       }
+    },
+    "needs_complementary_analysis": {
+      "type": "noul",
+      "yes_probability_percent": 35.0
     },
     "use_dictionary": {
       "type": "noul",
-      "yes_probability_percent": 11.0
-    },
-    "run_secondary_static": {
-      "type": "noul",
-      "yes_probability_percent": 10.0
+      "yes_probability_percent": 57.0
     }
   }
 }

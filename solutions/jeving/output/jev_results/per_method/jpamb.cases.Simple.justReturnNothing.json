@@ -2,25 +2,36 @@
   "method_id": "jpamb.cases.Simple.justReturnNothing",
   "source_file": "jpamb.cases.Simple.justReturnNothing.json",
   "answers": {
+    "method_understanding": {
+      "type": "choice",
+      "selected": "numeric_or_branch_logic",
+      "probabilities_percent": {
+        "calls_recursion_or_cast": 1.0,
+        "string_logic": 0.0,
+        "array_logic": 0.0,
+        "loop_logic": 0.0,
+        "numeric_or_branch_logic": 99.0
+      }
+    },
     "primary_analyzer": {
       "type": "choice",
       "selected": "static_sign",
       "probabilities_percent": {
-        "static_sign": 52.0,
-        "static_interval": 3.0,
+        "static_sign": 76.0,
+        "static_interval": 10.0,
         "static_string": 1.0,
-        "dynamic_random": 6.0,
-        "dynamic_small": 35.0,
-        "dynamic_mutation": 3.0
+        "dynamic_random": 0.0,
+        "dynamic_small": 13.0,
+        "dynamic_mutation": 0.0
       }
+    },
+    "needs_complementary_analysis": {
+      "type": "noul",
+      "yes_probability_percent": 20.0
     },
     "use_dictionary": {
       "type": "noul",
-      "yes_probability_percent": 4.0
-    },
-    "run_secondary_static": {
-      "type": "noul",
-      "yes_probability_percent": 7.0
+      "yes_probability_percent": 5.0
     }
   }
 }

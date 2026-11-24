@@ -2,25 +2,36 @@
   "method_id": "jpamb.cases.Arrays.arrayIsNullLength",
   "source_file": "jpamb.cases.Arrays.arrayIsNullLength.json",
   "answers": {
+    "method_understanding": {
+      "type": "choice",
+      "selected": "array_logic",
+      "probabilities_percent": {
+        "calls_recursion_or_cast": 0.0,
+        "string_logic": 0.0,
+        "array_logic": 87.0,
+        "loop_logic": 0.0,
+        "numeric_or_branch_logic": 13.0
+      }
+    },
     "primary_analyzer": {
       "type": "choice",
       "selected": "dynamic_random",
       "probabilities_percent": {
-        "static_sign": 1.0,
-        "static_interval": 2.0,
+        "static_sign": 13.0,
+        "static_interval": 17.0,
         "static_string": 0.0,
-        "dynamic_random": 96.0,
-        "dynamic_small": 1.0,
+        "dynamic_random": 36.0,
+        "dynamic_small": 34.0,
         "dynamic_mutation": 0.0
       }
     },
+    "needs_complementary_analysis": {
+      "type": "noul",
+      "yes_probability_percent": 52.0
+    },
     "use_dictionary": {
       "type": "noul",
-      "yes_probability_percent": 7.0
-    },
-    "run_secondary_static": {
-      "type": "noul",
-      "yes_probability_percent": 11.0
+      "yes_probability_percent": 66.0
     }
   }
 }
