@@ -2,25 +2,36 @@
   "method_id": "jpamb.cases.Calls.callsAssertFib",
   "source_file": "jpamb.cases.Calls.callsAssertFib.json",
   "answers": {
+    "method_understanding": {
+      "type": "choice",
+      "selected": "calls_recursion_or_cast",
+      "probabilities_percent": {
+        "calls_recursion_or_cast": 100.0,
+        "string_logic": 0.0,
+        "array_logic": 0.0,
+        "loop_logic": 0.0,
+        "numeric_or_branch_logic": 0.0
+      }
+    },
     "primary_analyzer": {
       "type": "choice",
       "selected": "dynamic_small",
       "probabilities_percent": {
-        "static_sign": 2.0,
-        "static_interval": 28.0,
+        "static_sign": 0.0,
+        "static_interval": 0.0,
         "static_string": 0.0,
-        "dynamic_random": 0.0,
-        "dynamic_small": 63.0,
-        "dynamic_mutation": 7.0
+        "dynamic_random": 7.0,
+        "dynamic_small": 87.0,
+        "dynamic_mutation": 6.0
       }
+    },
+    "needs_complementary_analysis": {
+      "type": "noul",
+      "yes_probability_percent": 43.0
     },
     "use_dictionary": {
       "type": "noul",
-      "yes_probability_percent": 19.0
-    },
-    "run_secondary_static": {
-      "type": "noul",
-      "yes_probability_percent": 71.0
+      "yes_probability_percent": 94.0
     }
   }
 }

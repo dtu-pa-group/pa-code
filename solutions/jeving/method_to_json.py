@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Export compact Jev states for @Case-annotated JPAMB Java methods.
+"""Export one compact Jev state per @Case-annotated JPAMB Java method.
 
-Only methods with @Case become states. Methods without @Case are included only
-when they are called as helper implementations. State JSON omits redundant and
-empty metadata, keeps the complete target method implementation, and includes
-only relevant helper methods, class fields, and imports where found.
+@Case is used ONLY to identify target methods. Its arguments and expected
+outcomes are deliberately not exported to Jev. Methods without @Case are
+included only as helper implementations when called by a target method.
+
+Each state is written separately under output/per_method/. No combined
+all-methods JSON is generated. Imports are not exported.
 
 Place this script in pa-code/solutions/jeving/.
 """
@@ -25,7 +27,6 @@ OUTPUT_DIR = Path(__file__).resolve().parent / "output"
 
 IDENTIFIER = re.compile(r"[A-Za-z_$][A-Za-z0-9_$]*")
 PACKAGE_RE = re.compile(r"\bpackage\s+([A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*)*)\s*;")
-IMPORT_RE = re.compile(r"\bimport\s+(?:static\s+)?[\w.$*]+\s*;")
 TYPE_RE = re.compile(r"\b(class|interface|enum|record)\s+([A-Za-z_$][\w$]*)\b")
 CALL_RE = re.compile(r"\b([A-Za-z_$][A-Za-z0-9_$]*)\s*\(")
 
@@ -38,15 +39,11 @@ CONTROL_OR_LANGUAGE_WORDS = {
 OBJECTIVE = (
     "Select the analysis technique or combination of techniques that best fits "
     "this Java test method. Use only the supplied analysis catalogue and each "
-    "technique's selection criteria. Base the decision on the implementation, "
-    "@Case inputs/behaviors, and relevant helper code; do not infer behavior "
+    "technique's selection criteria. Base the decision on the method implementation "
+    "and relevant helper code; do not infer behavior "
     "from the method name alone or invent analysis techniques."
 )
 
-CASE_SEMANTICS = (
-    "The @Case annotations are exhaustive: they enumerate the method's possible "
-    "input/behavior cases. A behavior not listed by the annotations is not possible."
-)
 
 
 def skip_quoted_or_comment(source: str, pos: int) -> int:
@@ -190,34 +187,9 @@ def remove_spans(text: str, spans: list[tuple[int, int]]) -> str:
     return "".join(chars)
 
 
-def extract_string_literals(text: str) -> list[str]:
-    """Extract Java string literals from annotation arguments."""
-    literals = re.findall(r'"(?:\\.|[^"\\])*"', text, flags=re.DOTALL)
-    values: list[str] = []
-    for literal in literals:
-        body = literal[1:-1]
-        replacements = {
-            r"\n": "\n", r"\r": "\r", r"\t": "\t",
-            r"\b": "\b", r"\f": "\f", r'\"': '"', r"\\": "\\",
-            r"\'": "'",
-        }
-        for old, new in replacements.items():
-            body = body.replace(old, new)
-        body = re.sub(r"\\u([0-9a-fA-F]{4})", lambda m: chr(int(m.group(1), 16)), body)
-        values.append(body)
-    return values
-
-
-def parse_case_value(value: str) -> dict[str, str]:
-    if "->" in value:
-        test_input, expected = value.split("->", 1)
-        return {"input": test_input.strip(), "expected": expected.strip()}
-    return {"input": value.strip()}
-
-
-def metadata_from_annotations(annotations: list[dict[str, Any]]) -> tuple[list[str], list[dict[str, str]], bool, bool]:
+def metadata_from_annotations(annotations: list[dict[str, Any]]) -> tuple[list[str], bool, bool]:
+    """Extract optional @Tag values and detect @Case without reading its payload."""
     tags: list[str] = []
-    cases: list[dict[str, str]] = []
     has_tag = False
     has_case = False
     for annotation in annotations:
@@ -228,9 +200,10 @@ def metadata_from_annotations(annotations: list[dict[str, Any]]) -> tuple[list[s
                 if token not in tags and token != "value":
                     tags.append(token)
         elif simple_name == "Case":
+            # Presence alone determines whether this method is a Jev state.
+            # The annotation arguments are intentionally never parsed or exported.
             has_case = True
-            cases.extend(parse_case_value(value) for value in extract_string_literals(annotation["args"]))
-    return tags, cases, has_tag, has_case
+    return tags, has_tag, has_case
 
 
 def find_type_opening(source: str, search_from: int) -> Optional[int]:
@@ -362,7 +335,7 @@ def extract_methods_from_type(source: str, type_info: dict[str, Any]) -> tuple[l
                     break
                 if method_info:
                     annotations = method_info["annotations"]
-                    tags, cases, has_tag, has_case = metadata_from_annotations(annotations)
+                    tags, has_tag, has_case = metadata_from_annotations(annotations)
                     method_source = source[segment_start:body_close + 1].strip()
                     signature = header.strip()
                     header_leading_space = len(header) - len(header.lstrip())
@@ -380,9 +353,7 @@ def extract_methods_from_type(source: str, type_info: dict[str, Any]) -> tuple[l
                         "source": method_source,
                         "body": body_source,
                         "tags": tags,
-                        "cases": cases,
                         "annotation_presence": {"Case": has_case, "Tag": has_tag},
-                        "annotations": [a["source"] for a in annotations],
                         "_annotation_spans": [
                             {
                                 "name": a["name"].split(".")[-1],
@@ -424,7 +395,7 @@ def find_call_names(method_body: str) -> list[str]:
 
 
 def source_without_case_tag(method: dict[str, Any]) -> str:
-    """Return the complete method source, with @Case/@Tag moved to JSON fields."""
+    """Return the complete method source without @Case/@Tag annotations."""
     header = method["signature"]
     spans = [
         (item["start"], item["end"])
@@ -534,19 +505,6 @@ def extract_relevant_fields(source: str, type_info: dict[str, Any], used_text: s
     return fields
 
 
-def relevant_imports(imports: list[str], used_text: str) -> list[str]:
-    """Keep only imports whose simple name is referenced by this state/context."""
-    used = set(IDENTIFIER.findall(mask_non_code(used_text)))
-    selected: list[str] = []
-    for statement in imports:
-        clean = statement.strip()
-        target = clean.removeprefix("import ").removesuffix(";").strip()
-        target = target.removeprefix("static ")
-        simple = target.rsplit(".", 1)[-1]
-        if simple == "*" or simple in used:
-            selected.append(clean)
-    return selected
-
 
 def rough_token_estimate(text: str) -> int:
     """A rough planning estimate only; actual tokenizer counts will differ."""
@@ -566,6 +524,12 @@ def main() -> int:
         return 1
 
     output_dir.mkdir(parents=True, exist_ok=True)
+    # Remove legacy combined exports from earlier versions of this script.
+    for obsolete_name in ("jev_states.json", "jev_states.txt"):
+        obsolete_file = output_dir / obsolete_name
+        if obsolete_file.exists():
+            obsolete_file.unlink()
+
     all_warnings: list[str] = []
     method_records: list[dict[str, Any]] = []
     scanned_types = 0
@@ -581,7 +545,6 @@ def main() -> int:
         masked_file = mask_non_code(source)
         package_match = PACKAGE_RE.search(masked_file)
         package_name = package_match.group(1) if package_match else ""
-        imports = IMPORT_RE.findall(masked_file)
 
         for type_info in find_types(source, relative_path):
             scanned_types += 1
@@ -604,7 +567,6 @@ def main() -> int:
                     "method": method,
                     "type_info": type_info,
                     "package": package_name,
-                    "imports": imports,
                     "file_source": source,
                 })
 
@@ -676,135 +638,65 @@ def main() -> int:
 
         return helpers
 
-    helper_record_by_id = {
-        record["method"]["id"]: record
-        for record in method_records
-        if not record["method"]["annotation_presence"]["Case"]
-    }
+    per_method_dir = output_dir / "per_method"
+    per_method_dir.mkdir(parents=True, exist_ok=True)
+    # Remove stale per-method exports so the directory reflects this run only.
+    for old_file in per_method_dir.glob("*.json"):
+        old_file.unlink()
 
-    states: list[dict[str, Any]] = []
+    case_count = 0
+    tag_count = 0
+    attached_helper_ids: set[str] = set()
     for record in method_records:
         method = record["method"]
         if not method["annotation_presence"]["Case"]:
             continue
 
-        if not method["cases"]:
-            all_warnings.append(
-                f"@Case was found but no string cases were parsed for {method['id']}. "
-                "Check the annotation format; the state was retained."
-            )
-
         helpers = collect_helpers(record)
         target_source = source_without_case_tag(method)
-        context_sources = [target_source] + [helper["source"] for helper in helpers]
-        used_text = "\n".join(context_sources)
+        used_text = "\n".join([target_source] + [helper["source"] for helper in helpers])
         fields = extract_relevant_fields(record["file_source"], record["type_info"], used_text)
-        import_candidates = list(record["imports"])
-        for helper in helpers:
-            helper_record = helper_record_by_id.get(helper["id"])
-            if helper_record:
-                import_candidates.extend(helper_record["imports"])
-        # Preserve order while removing repeated import statements.
-        import_candidates = list(dict.fromkeys(import_candidates))
-        imports = relevant_imports(import_candidates, used_text + "\n" + "\n".join(fields))
 
-        # Compact state: no duplicate class dump, body copy, class kind, empty arrays,
-        # repeated annotation-presence flags, or redundant annotation strings.
+        # @Case arguments/expected outcomes are intentionally absent from this state.
         state: dict[str, Any] = {
             "id": method["id"],
             "source": target_source,
         }
-        if method["cases"]:
-            state["cases"] = [
-                {key: value for key, value in case.items() if value != ""}
-                for case in method["cases"]
-            ]
-        else:
-            raw_case_annotations = [
-                annotation for annotation in method["annotations"]
-                if annotation.startswith("@Case") or ".Case" in annotation
-            ]
-            if raw_case_annotations:
-                state["case_annotations"] = raw_case_annotations
         if method["tags"]:
             state["tags"] = method["tags"]
         if helpers:
             state["helpers"] = helpers
+            attached_helper_ids.update(helper["id"] for helper in helpers)
         if fields:
             state["fields"] = fields
-        if imports:
-            state["imports"] = imports
-        states.append(state)
 
-    document = {
-        "objective": OBJECTIVE,
-        "case_semantics": CASE_SEMANTICS,
-        "states": states,
-    }
-
-    # Minified JSON is the canonical Jev input. Pretty JSON is provided per method
-    # only for convenient inspection; these files contain the same compact schema.
-    json_path = output_dir / "jev_states.json"
-    txt_path = output_dir / "jev_states.txt"
-    compact_json = json.dumps(document, ensure_ascii=False, separators=(",", ":"))
-    json_path.write_text(compact_json + "\n", encoding="utf-8")
-
-    per_method_dir = output_dir / "per_method"
-    per_method_dir.mkdir(parents=True, exist_ok=True)
-    for old_file in per_method_dir.glob("*.json"):
-        old_file.unlink()
-    for state in states:
         individual = {
             "objective": OBJECTIVE,
-            "case_semantics": CASE_SEMANTICS,
             "state": state,
         }
         safe_name = re.sub(r"[^A-Za-z0-9_.-]+", "_", state["id"])
         (per_method_dir / f"{safe_name}.json").write_text(
             json.dumps(individual, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
         )
+        case_count += 1
+        if method["tags"]:
+            tag_count += 1
 
-    case_count = len(states)
-    tag_count = sum(1 for record in method_records if record["method"]["annotation_presence"]["Case"] and record["method"]["tags"])
-    helper_index_count = sum(1 for record in method_records if not record["method"]["annotation_presence"]["Case"])
-    attached_helper_count = len({helper["id"] for state in states for helper in state.get("helpers", [])})
-    estimated_tokens = rough_token_estimate(compact_json)
-    estimated_state_tokens = rough_token_estimate("".join(json.dumps(state, ensure_ascii=False, separators=(",", ":")) for state in states))
-
-    report_lines = [
-        "JEV COMPACT @CASE STATE EXPORT",
-        "=" * 34,
-        f"Input directory: {input_path}",
-        f"Java files scanned: {len(java_files)}",
-        f"Types scanned: {scanned_types}",
-        f"Java methods parsed (for helper resolution): {len(method_records)}",
-        f"@Case states exported: {case_count}",
-        f"Methods without @Case available for helper resolution: {helper_index_count}",
-        f"Distinct helper implementations actually attached: {attached_helper_count}",
-        f"Exported states with non-empty @Tag: {tag_count}",
-        f"JSON size: {len(compact_json):,} characters",
-        f"Rough token estimate for complete JSON (characters / 4): about {estimated_tokens:,}",
-        f"Rough token estimate for states only: about {estimated_state_tokens:,}",
-        "",
-        "State fields:",
-        "- Always: id, source, cases",
-        "- Optional only when relevant/non-empty: tags, helpers, fields, imports",
-        "- Shared once at document level: objective, case_semantics",
-    ]
-    if all_warnings:
-        report_lines.extend(["", "WARNINGS", "=" * 34])
-        report_lines.extend(f"- {warning}" for warning in all_warnings)
-    txt_path.write_text("\n".join(report_lines) + "\n", encoding="utf-8")
-
+    helper_index_count = sum(
+        1 for record in method_records
+        if not record["method"]["annotation_presence"]["Case"]
+    )
     print(f"Scanned {len(java_files)} Java file(s) and {scanned_types} type(s).")
-    print(f"Parsed {len(method_records)} methods for context; exported {case_count} @Case state(s).")
-    print(f"Attached {attached_helper_count} distinct helper implementation(s) across those states.")
-    print(f"JSON: {json_path}")
-    print(f"Report: {txt_path}")
-    print(f"Individual states: {per_method_dir}")
-    print(f"JSON size: {len(compact_json):,} characters; rough token estimate: about {estimated_tokens:,} (characters / 4).")
+    print(f"Parsed {len(method_records)} methods for helper resolution.")
+    print(f"Exported {case_count} individual @Case state file(s) to: {per_method_dir}")
+    print(f"Methods without @Case available for helper resolution: {helper_index_count}")
+    print(f"Distinct helper implementations attached: {len(attached_helper_ids)}")
+    print(f"States with non-empty @Tag: {tag_count}")
+    print("No @Case values, expected outcomes, imports, or combined JSON were exported.")
     if all_warnings:
-        print(f"Warnings: {len(all_warnings)} (see report)", file=sys.stderr)
+        print("Warnings:", file=sys.stderr)
+        for warning in all_warnings:
+            print(f"- {warning}", file=sys.stderr)
     return 0
 
 

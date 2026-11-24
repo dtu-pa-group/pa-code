@@ -2,25 +2,36 @@
   "method_id": "jpamb.cases.Arrays.arrayInBounds",
   "source_file": "jpamb.cases.Arrays.arrayInBounds.json",
   "answers": {
+    "method_understanding": {
+      "type": "choice",
+      "selected": "array_logic",
+      "probabilities_percent": {
+        "calls_recursion_or_cast": 0.0,
+        "string_logic": 0.0,
+        "array_logic": 100.0,
+        "loop_logic": 0.0,
+        "numeric_or_branch_logic": 0.0
+      }
+    },
     "primary_analyzer": {
       "type": "choice",
       "selected": "static_interval",
       "probabilities_percent": {
-        "static_sign": 2.0,
-        "static_interval": 51.0,
+        "static_sign": 25.0,
+        "static_interval": 52.0,
         "static_string": 0.0,
-        "dynamic_random": 46.0,
-        "dynamic_small": 1.0,
+        "dynamic_random": 9.0,
+        "dynamic_small": 14.0,
         "dynamic_mutation": 0.0
       }
     },
+    "needs_complementary_analysis": {
+      "type": "noul",
+      "yes_probability_percent": 33.0
+    },
     "use_dictionary": {
       "type": "noul",
-      "yes_probability_percent": 6.0
-    },
-    "run_secondary_static": {
-      "type": "noul",
-      "yes_probability_percent": 14.0
+      "yes_probability_percent": 16.0
     }
   }
 }

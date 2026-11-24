@@ -2,25 +2,36 @@
   "method_id": "jpamb.cases.Simple.earlyReturn",
   "source_file": "jpamb.cases.Simple.earlyReturn.json",
   "answers": {
+    "method_understanding": {
+      "type": "choice",
+      "selected": "numeric_or_branch_logic",
+      "probabilities_percent": {
+        "calls_recursion_or_cast": 0.0,
+        "string_logic": 0.0,
+        "array_logic": 0.0,
+        "loop_logic": 0.0,
+        "numeric_or_branch_logic": 100.0
+      }
+    },
     "primary_analyzer": {
       "type": "choice",
-      "selected": "static_sign",
+      "selected": "static_interval",
       "probabilities_percent": {
-        "static_sign": 77.0,
-        "static_interval": 6.0,
+        "static_sign": 28.0,
+        "static_interval": 60.0,
         "static_string": 0.0,
         "dynamic_random": 1.0,
-        "dynamic_small": 15.0,
-        "dynamic_mutation": 1.0
+        "dynamic_small": 11.0,
+        "dynamic_mutation": 0.0
       }
+    },
+    "needs_complementary_analysis": {
+      "type": "noul",
+      "yes_probability_percent": 28.0
     },
     "use_dictionary": {
       "type": "noul",
-      "yes_probability_percent": 8.0
-    },
-    "run_secondary_static": {
-      "type": "noul",
-      "yes_probability_percent": 25.0
+      "yes_probability_percent": 26.0
     }
   }
 }

@@ -2,25 +2,36 @@
   "method_id": "jpamb.cases.Simple.checkBeforeDivideByN2",
   "source_file": "jpamb.cases.Simple.checkBeforeDivideByN2.json",
   "answers": {
+    "method_understanding": {
+      "type": "choice",
+      "selected": "numeric_or_branch_logic",
+      "probabilities_percent": {
+        "calls_recursion_or_cast": 0.0,
+        "string_logic": 0.0,
+        "array_logic": 0.0,
+        "loop_logic": 0.0,
+        "numeric_or_branch_logic": 100.0
+      }
+    },
     "primary_analyzer": {
       "type": "choice",
-      "selected": "static_sign",
+      "selected": "static_interval",
       "probabilities_percent": {
-        "static_sign": 75.0,
-        "static_interval": 1.0,
+        "static_sign": 21.0,
+        "static_interval": 69.0,
         "static_string": 0.0,
-        "dynamic_random": 0.0,
-        "dynamic_small": 20.0,
-        "dynamic_mutation": 4.0
+        "dynamic_random": 2.0,
+        "dynamic_small": 7.0,
+        "dynamic_mutation": 1.0
       }
+    },
+    "needs_complementary_analysis": {
+      "type": "noul",
+      "yes_probability_percent": 65.0
     },
     "use_dictionary": {
       "type": "noul",
-      "yes_probability_percent": 50.0
-    },
-    "run_secondary_static": {
-      "type": "noul",
-      "yes_probability_percent": 90.0
+      "yes_probability_percent": 88.0
     }
   }
 }

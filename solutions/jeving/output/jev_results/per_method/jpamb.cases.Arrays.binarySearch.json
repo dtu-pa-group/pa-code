@@ -2,25 +2,36 @@
   "method_id": "jpamb.cases.Arrays.binarySearch",
   "source_file": "jpamb.cases.Arrays.binarySearch.json",
   "answers": {
+    "method_understanding": {
+      "type": "choice",
+      "selected": "array_logic",
+      "probabilities_percent": {
+        "calls_recursion_or_cast": 0.0,
+        "string_logic": 0.0,
+        "array_logic": 76.0,
+        "loop_logic": 24.0,
+        "numeric_or_branch_logic": 0.0
+      }
+    },
     "primary_analyzer": {
       "type": "choice",
-      "selected": "static_interval",
+      "selected": "dynamic_small",
       "probabilities_percent": {
         "static_sign": 0.0,
-        "static_interval": 94.0,
+        "static_interval": 1.0,
         "static_string": 0.0,
-        "dynamic_random": 0.0,
-        "dynamic_small": 4.0,
-        "dynamic_mutation": 2.0
+        "dynamic_random": 7.0,
+        "dynamic_small": 87.0,
+        "dynamic_mutation": 5.0
       }
+    },
+    "needs_complementary_analysis": {
+      "type": "noul",
+      "yes_probability_percent": 69.0
     },
     "use_dictionary": {
       "type": "noul",
-      "yes_probability_percent": 26.0
-    },
-    "run_secondary_static": {
-      "type": "noul",
-      "yes_probability_percent": 79.0
+      "yes_probability_percent": 77.0
     }
   }
 }

@@ -1,18 +1,7 @@
 {
-  "objective": "Select the analysis technique or combination of techniques that best fits this Java test method. Use only the supplied analysis catalogue and each technique's selection criteria. Base the decision on the implementation, @Case inputs/behaviors, and relevant helper code; do not infer behavior from the method name alone or invent analysis techniques.",
-  "case_semantics": "The @Case annotations are exhaustive: they enumerate the method's possible input/behavior cases. A behavior not listed by the annotations is not possible.",
+  "objective": "Select the analysis technique or combination of techniques that best fits this Java test method. Use only the supplied analysis catalogue and each technique's selection criteria. Base the decision on the method implementation and relevant helper code; do not infer behavior from the method name alone or invent analysis techniques.",
   "state": {
     "id": "jpamb.cases.Dependent.divisionLoop",
-    "source": "public static void divisionLoop(int n) {\n    for (int i = 0; i < 5; i++) { // 1024 / 2^5 = 32\n      n /= 2;\n    }\n    assert n != 32;\n  }",
-    "cases": [
-      {
-        "input": "(0)",
-        "expected": "ok"
-      },
-      {
-        "input": "(1024)",
-        "expected": "assertion error"
-      }
-    ]
+    "source": "public static void divisionLoop(int n) {\n    for (int i = 0; i < 5; i++) { // 1024 / 2^5 = 32\n      n /= 2;\n    }\n    assert n != 32;\n  }"
   }
 }

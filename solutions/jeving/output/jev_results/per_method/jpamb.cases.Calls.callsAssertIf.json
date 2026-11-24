@@ -2,25 +2,36 @@
   "method_id": "jpamb.cases.Calls.callsAssertIf",
   "source_file": "jpamb.cases.Calls.callsAssertIf.json",
   "answers": {
+    "method_understanding": {
+      "type": "choice",
+      "selected": "calls_recursion_or_cast",
+      "probabilities_percent": {
+        "calls_recursion_or_cast": 97.0,
+        "string_logic": 0.0,
+        "array_logic": 0.0,
+        "loop_logic": 0.0,
+        "numeric_or_branch_logic": 3.0
+      }
+    },
     "primary_analyzer": {
       "type": "choice",
       "selected": "dynamic_small",
       "probabilities_percent": {
-        "static_sign": 1.0,
+        "static_sign": 0.0,
         "static_interval": 0.0,
         "static_string": 0.0,
-        "dynamic_random": 0.0,
-        "dynamic_small": 97.0,
-        "dynamic_mutation": 2.0
+        "dynamic_random": 6.0,
+        "dynamic_small": 91.0,
+        "dynamic_mutation": 3.0
       }
+    },
+    "needs_complementary_analysis": {
+      "type": "noul",
+      "yes_probability_percent": 50.0
     },
     "use_dictionary": {
       "type": "noul",
-      "yes_probability_percent": 7.0
-    },
-    "run_secondary_static": {
-      "type": "noul",
-      "yes_probability_percent": 13.0
+      "yes_probability_percent": 31.0
     }
   }
 }

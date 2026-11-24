@@ -1,21 +1,10 @@
 {
-  "objective": "Select the analysis technique or combination of techniques that best fits this Java test method. Use only the supplied analysis catalogue and each technique's selection criteria. Base the decision on the implementation, @Case inputs/behaviors, and relevant helper code; do not infer behavior from the method name alone or invent analysis techniques.",
-  "case_semantics": "The @Case annotations are exhaustive: they enumerate the method's possible input/behavior cases. A behavior not listed by the annotations is not possible.",
+  "objective": "Select the analysis technique or combination of techniques that best fits this Java test method. Use only the supplied analysis catalogue and each technique's selection criteria. Base the decision on the method implementation and relevant helper code; do not infer behavior from the method name alone or invent analysis techniques.",
   "state": {
     "id": "jpamb.cases.Arrays.arrayContentAboveMinus13",
     "source": "public static void arrayContentAboveMinus13() {\n    int array[] = {1, 2, 100, -13, 23};\n    for (int i = 0; i < array.length; i++) {\n      assert array[i] >= -13;\n    }\n  }",
-    "cases": [
-      {
-        "input": "()",
-        "expected": "ok"
-      }
-    ],
     "tags": [
       "ARRAY"
-    ],
-    "imports": [
-      "import static jpamb.utils.Tag.TagType.*;",
-      "import jpamb.utils.*;"
     ]
   }
 }

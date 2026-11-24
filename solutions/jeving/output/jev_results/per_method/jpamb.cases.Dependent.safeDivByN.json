@@ -2,25 +2,36 @@
   "method_id": "jpamb.cases.Dependent.safeDivByN",
   "source_file": "jpamb.cases.Dependent.safeDivByN.json",
   "answers": {
+    "method_understanding": {
+      "type": "choice",
+      "selected": "numeric_or_branch_logic",
+      "probabilities_percent": {
+        "calls_recursion_or_cast": 0.0,
+        "string_logic": 0.0,
+        "array_logic": 0.0,
+        "loop_logic": 0.0,
+        "numeric_or_branch_logic": 100.0
+      }
+    },
     "primary_analyzer": {
       "type": "choice",
-      "selected": "static_sign",
+      "selected": "static_interval",
       "probabilities_percent": {
-        "static_sign": 73.0,
-        "static_interval": 1.0,
+        "static_sign": 23.0,
+        "static_interval": 72.0,
         "static_string": 0.0,
-        "dynamic_random": 0.0,
-        "dynamic_small": 22.0,
-        "dynamic_mutation": 4.0
+        "dynamic_random": 1.0,
+        "dynamic_small": 4.0,
+        "dynamic_mutation": 0.0
       }
+    },
+    "needs_complementary_analysis": {
+      "type": "noul",
+      "yes_probability_percent": 40.0
     },
     "use_dictionary": {
       "type": "noul",
-      "yes_probability_percent": 41.0
-    },
-    "run_secondary_static": {
-      "type": "noul",
-      "yes_probability_percent": 86.0
+      "yes_probability_percent": 83.0
     }
   }
 }
