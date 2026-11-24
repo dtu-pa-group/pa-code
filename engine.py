@@ -127,6 +127,8 @@ def _dynamic(strategy, bc, method_id):
         "random": lambda: dynamic.random_inputs(rand, method_id),
         "small": lambda: dynamic.fuzz_small(rand, method_id),
         "mutation": lambda: dynamic.fuzz_mutation(rand, method_id, behaviors),
+        "coverage": lambda: dynamic.fuzz_coverage(rand, method_id, bc,max_steps=200),
+
     }
     unsupported = set()
     try:
@@ -159,8 +161,9 @@ for _name, _domain in (
     ("static_int", "interval"),
 ):
     register(_name, "static", partial(_static, _domain))
-for _strategy in ("random", "small", "mutation"):
+for _strategy in ("random", "small", "mutation","coverage"):
     register(f"dynamic_{_strategy}", "dynamic", partial(_dynamic, _strategy))
+
 
 
 def _selection(analyses):
