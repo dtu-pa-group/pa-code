@@ -104,6 +104,61 @@ See the [engine guide](information/engine.md) for the full API, scoring details,
 and registration of future techniques such as `dynamic_coverage`. Coverage
 fuzzing must be implemented and registered before that name can be selected.
 
+### Run the rule-based heuristic selector
+
+`solutions/heuristics/rule_based.py` selects which `engine.py` techniques to run
+for each method by inspecting its decompiled JVM bytecode in `target/decompiled/`.
+It does not modify `engine.py` or the individual technique implementations:
+
+```bash
+# Run across the suite:
+uv run jpamb analyse -- python solutions/heuristics/rule_based.py
+
+# Quick run on a subset:
+uv run jpamb analyse --filter Simple --iterations 1 -- python solutions/heuristics/rule_based.py
+
+# One method directly, without suite scoring:
+uv run python solutions/heuristics/rule_based.py 'jpamb.cases.Simple.divideByN:(I)I'
+
+# Check JPAMB metadata:
+uv run python solutions/heuristics/rule_based.py info
+```
+
+For each method, the selector parses the JVM parameter descriptor and inspects
+the decompiled bytecode for String and array operations, integer arithmetic,
+division, branches, backward-jump loops, type casts, recursion, and static
+helper calls. It then applies nine rule groups (`R1a–R9b`) in priority order:
+
+1. Methods with static helper calls, recursion, type casts (`R1a–R1b`), or loops
+   (`R5a–R5b`) run compatible dynamic fuzzers only (`dynamic_small` and
+   `dynamic_mutation` for up to two `int`/`boolean` parameters, `dynamic_mutation`
+   for more than two `int`/`boolean` parameters, or `dynamic_random` for String
+   and array parameters).
+2. Methods with String or array logic (`R2–R4`), branch-guarded division (`R6`),
+   numeric branches or arithmetic (`R7`), or short straight-line bytecode (`R8`)
+   run the matching static domain(s) (`static_string`, `static_interval`,
+   `static_sign`) paired with a compatible dynamic fuzzer so `engine.combine()`
+   receives both static exclusions (`no`) and concrete dynamic witnesses (`yes`).
+3. All other methods (`R9a–R9b`) fall back to the compatible dynamic fuzzer(s).
+
+Each `jpamb analyse` run writes a sequential JSON log to
+`solutions/heuristics/output/` (`output_1.json`, `output_2.json`, ...) recording
+the selected `analyses` and combined `predictions` for every evaluated method.
+
+The Python interface for querying the selector directly is:
+
+```python
+import sys
+sys.path.insert(0, "solutions/heuristics")
+
+from engine import run
+from rule_based import select_for_method
+
+method_id = "jpamb.cases.Simple.divideByN:(I)I"
+selected = select_for_method(method_id)
+behaviors = run(selected, method_id)
+```
+
 ### Run a dynamic fuzzer
 
 ```bash
@@ -203,6 +258,7 @@ experiments with different random seeds.
 - [Python setup](docs/python.md): environments and entry points.
 - [Interpreter evaluation](docs/interpret.md): concrete and abstract traces.
 - [Extending JPAMB](docs/extending-jpamb.md): adding benchmark cases.
+- [Rule-based heuristic selector](solutions/heuristics/rule_based.py): bytecode feature extraction, `R1a–R9b` routing rules, and `engine.py` integration.
 
 The dynamic interpreter supports the instructions needed by the supplied
 concrete cases, but is not a complete JVM. Unsupported executions are reported
