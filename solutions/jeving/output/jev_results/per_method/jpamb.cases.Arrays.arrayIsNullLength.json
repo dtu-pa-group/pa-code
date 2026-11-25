@@ -8,30 +8,34 @@
       "probabilities_percent": {
         "calls_recursion_or_cast": 0.0,
         "string_logic": 0.0,
-        "array_logic": 87.0,
+        "array_logic": 83.0,
         "loop_logic": 0.0,
-        "numeric_or_branch_logic": 13.0
+        "numeric_or_branch_logic": 17.0
       }
     },
     "primary_analyzer": {
       "type": "choice",
-      "selected": "dynamic_random",
+      "selected": "dynamic_small",
       "probabilities_percent": {
-        "static_sign": 13.0,
-        "static_interval": 17.0,
+        "static_sign": 20.0,
+        "static_interval": 28.0,
         "static_string": 0.0,
-        "dynamic_random": 36.0,
-        "dynamic_small": 34.0,
+        "dynamic_random": 23.0,
+        "dynamic_small": 29.0,
         "dynamic_mutation": 0.0
       }
     },
     "needs_complementary_analysis": {
       "type": "noul",
-      "yes_probability_percent": 52.0
+      "yes_probability_percent": 51.0
     },
     "use_dictionary": {
       "type": "noul",
-      "yes_probability_percent": 66.0
+      "yes_probability_percent": 67.0
     }
+  },
+  "selection_timing": {
+    "run_id": "9c9f7612066548bf84c5a45fb57ce0bb",
+    "jev_seconds": 0.166700541973114
   }
 }

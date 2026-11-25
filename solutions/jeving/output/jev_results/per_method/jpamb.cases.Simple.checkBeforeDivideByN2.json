@@ -17,21 +17,25 @@
       "type": "choice",
       "selected": "static_interval",
       "probabilities_percent": {
-        "static_sign": 21.0,
+        "static_sign": 20.0,
         "static_interval": 69.0,
         "static_string": 0.0,
         "dynamic_random": 2.0,
-        "dynamic_small": 7.0,
+        "dynamic_small": 8.0,
         "dynamic_mutation": 1.0
       }
     },
     "needs_complementary_analysis": {
       "type": "noul",
-      "yes_probability_percent": 65.0
+      "yes_probability_percent": 59.0
     },
     "use_dictionary": {
       "type": "noul",
-      "yes_probability_percent": 88.0
+      "yes_probability_percent": 89.0
     }
+  },
+  "selection_timing": {
+    "run_id": "9c9f7612066548bf84c5a45fb57ce0bb",
+    "jev_seconds": 0.17169120800099336
   }
 }

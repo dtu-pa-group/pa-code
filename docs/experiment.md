@@ -3,7 +3,7 @@
 [`experiment.py`](../experiment.py) compares analyzer-selection strategies on the
 same JPAMB benchmark. One experiment can run one or more strategies. It saves
 their selected analyzers, timings, predictions, and scores for later
-[evaluation](evaluation.md).
+evaluation.
 
 ## Run an experiment
 
