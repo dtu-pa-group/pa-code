@@ -34,3 +34,6 @@ tags
 .DS_Store
 
 .idea
+
+# Jev per_method results
+solutions/jeving/output/jev_results/per_method/*
