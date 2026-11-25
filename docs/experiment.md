@@ -48,6 +48,25 @@ Use selections and timings from the **same Jev run**. The script checks that
 both files cover the benchmark. A method name without its JVM descriptor is
 accepted if it identifies exactly one benchmark method.
 
+To collect fresh Jev inputs, run the existing pipeline with a Python
+environment that has the TypeSafe SDK and `TYPESAFE_API_KEY` configured.
+
+```bash
+python solutions/jeving/method_to_json.py &&
+python solutions/jeving/jev_run.py &&
+python solutions/jeving/jev_selection.py
+```
+
+The last step prints the paths to the new files in `solutions/jeving/output/`.
+Pass `analysis_selections-<timestamp>-<code>.json` to `--jev-selections` and
+`selection_times-<timestamp>-<code>.json` to `--jev-times`. Both files share
+the same UTC timestamp and code, and previous exports stay available.
+Each timing includes request preparation, the API call
+and its network wait, response conversion, and the local analyzer-selection
+rules. The measurement excludes suite export, JSON file I/O, and progress
+messages. A set of older or mixed-run responses can still produce analyzer
+choices. A timing file requires complete timing data from one run.
+
 ## Experiment flow
 
 ```mermaid

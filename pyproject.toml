@@ -9,6 +9,7 @@ dependencies = [
   "PyYAML==6.0.*",
   "click==8.1.*",
   "runit==0.1.*",
+  "typesafe-sdk>=0.7.6",
 ]
 authors = [
   { name = "Christian Gram Kalhauge", email = "chrg@dtu.dk" }

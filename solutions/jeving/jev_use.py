@@ -49,19 +49,24 @@ class PipelineError(RuntimeError):
 
 
 def _load_selections() -> list[dict[str, Any]]:
-    """Read and validate the analyzer-selection JSON file."""
-    if not SELECTION_FILE.is_file():
+    """Read the newest timestamped selection, falling back to the saved baseline."""
+    selection_file = max(
+        SELECTION_FILE.parent.glob(f"{SELECTION_FILE.stem}-*.json"),
+        key=lambda path: (path.stat().st_mtime_ns, path.name),
+        default=SELECTION_FILE,
+    )
+    if not selection_file.is_file():
         raise FileNotFoundError(
-            f"Selection file not found: {SELECTION_FILE}. Run run_pipeline() first."
+            f"Selection file not found: {selection_file}. Run run_pipeline() first."
         )
 
     try:
-        records = json.loads(SELECTION_FILE.read_text(encoding="utf-8"))
+        records = json.loads(selection_file.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:
-        raise ValueError(f"Invalid JSON in {SELECTION_FILE}") from exc
+        raise ValueError(f"Invalid JSON in {selection_file}") from exc
 
     if not isinstance(records, list):
-        raise ValueError("analysis_selections.json must contain a JSON array.")
+        raise ValueError(f"{selection_file} must contain a JSON array.")
 
     seen: set[str] = set()
     for index, record in enumerate(records):
