@@ -2,8 +2,11 @@ from __future__ import annotations
 
 import json
 import re
+from datetime import UTC, datetime
 from pathlib import Path
+from time import perf_counter
 from typing import Any
+from uuid import uuid4
 
 BASE_DIR = Path(__file__).resolve().parent
 RESULTS_DIR = BASE_DIR / "output" / "jev_results" / "per_method"
@@ -311,6 +314,8 @@ def main() -> None:
         )
 
     selections: list[dict[str, Any]] = []
+    selection_times: dict[str, float] = {}
+    run_ids: set[str] = set()
 
     for result_file in result_files:
         print(f"Processing: {result_file.name}")
@@ -319,12 +324,9 @@ def main() -> None:
         answers = result.get("answers", {})
         method_state = load_method_state(result_file, method_id)
 
+        start = perf_counter()
         parameter_types, parameter_warning = extract_parameter_types(method_state)
         compatible, compatibility_warning = compatible_analyzers(parameter_types)
-        if compatibility_warning:
-            print(f"  Compatibility warning: {compatibility_warning}")
-        else:
-            print(f"  Parameter types: {parameter_types}")
 
         primary = answers.get("primary_analyzer", {})
         if not isinstance(primary, dict):
@@ -345,9 +347,19 @@ def main() -> None:
         coverage_requested = yes_probability(answers, "use_dictionary") >= NOUL_YES_MIN
         if coverage_requested and COVERAGE_ANALYZER not in selected:
             selected.append(COVERAGE_ANALYZER)
+        rules_seconds = perf_counter() - start
 
+        if compatibility_warning:
+            print(f"  Compatibility warning: {compatibility_warning}")
+        else:
+            print(f"  Parameter types: {parameter_types}")
         print(f"  Compatible analyzers: {sorted(compatible)}")
         print(f"  Selected analyzers: {selected}")
+
+        timing = result.get("selection_timing")
+        if timing is not None:
+            run_ids.add(timing["run_id"])
+            selection_times[method_id] = timing["jev_seconds"] + rules_seconds
 
         # Keep the output deliberately minimal: method identifier and the
         # analyzers that should run. No diagnostics, metadata, or dictionaries.
@@ -359,11 +371,22 @@ def main() -> None:
         )
 
     OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT_FILE.write_text(
-        json.dumps(selections, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8",
-    )
-    print(f"Saved {len(selections)} method selection(s) to: {OUTPUT_FILE}")
+    timestamp = datetime.now(UTC).strftime("%Y-%m-%dT%H-%M-%SZ")
+    suffix = f"{timestamp}-{uuid4().hex[:8]}.json"
+    selections_file = OUTPUT_FILE.with_name(f"{OUTPUT_FILE.stem}-{suffix}")
+    if len(run_ids) == 1 and len(selection_times) == len(selections):
+        times_file = OUTPUT_FILE.with_name(f"selection_times-{suffix}")
+        with times_file.open("x", encoding="utf-8") as output:
+            json.dump(selection_times, output, indent=2, ensure_ascii=False)
+            output.write("\n")
+        print(f"Saved selection times in seconds to: {times_file}")
+    elif selection_times:
+        print("Selection times require complete results from a single Jev run.")
+
+    with selections_file.open("x", encoding="utf-8") as output:
+        json.dump(selections, output, indent=2, ensure_ascii=False)
+        output.write("\n")
+    print(f"Saved {len(selections)} method selection(s) to: {selections_file}")
 
 
 if __name__ == "__main__":

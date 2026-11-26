@@ -20,18 +20,22 @@
         "static_sign": 3.0,
         "static_interval": 2.0,
         "static_string": 3.0,
-        "dynamic_random": 5.0,
-        "dynamic_small": 83.0,
-        "dynamic_mutation": 4.0
+        "dynamic_random": 7.0,
+        "dynamic_small": 79.0,
+        "dynamic_mutation": 6.0
       }
     },
     "needs_complementary_analysis": {
       "type": "noul",
-      "yes_probability_percent": 63.0
+      "yes_probability_percent": 59.0
     },
     "use_dictionary": {
       "type": "noul",
-      "yes_probability_percent": 23.0
+      "yes_probability_percent": 17.0
     }
+  },
+  "selection_timing": {
+    "run_id": "9c9f7612066548bf84c5a45fb57ce0bb",
+    "jev_seconds": 0.19039862498175353
   }
 }

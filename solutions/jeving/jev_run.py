@@ -6,9 +6,11 @@ but never receives @Case values or expected outcomes. The separate selection
 script can use Jev's probability distributions to make the final decisions.
 """
 
-from pathlib import Path
 import json
 import os
+from pathlib import Path
+from time import perf_counter
+from uuid import uuid4
 
 from typesafe_sdk import Choice, Noul, TypeSafeClient
 
@@ -300,25 +302,28 @@ def main():
         raise SystemExit(f"No method JSON files found in: {METHODS_DIR}")
 
     PER_METHOD_RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    run_id = uuid4().hex
 
     with TypeSafeClient(api_key=API_KEY, model=MODEL) as client:
         for method_file in method_files:
             data = json.loads(method_file.read_text(encoding="utf-8"))
-            state = build_jev_state(data)
-            method_id = state["method"]["id"]
-
+            method_id = data["state"]["id"]
             print(f"\nAnalysing: {method_id}")
 
+            start = perf_counter()
+            state = build_jev_state(data)
             response = client.system_one(state=state, questions=QUESTIONS)
             answers = {
                 question: serialize_answer(answer)
                 for question, answer in response.answers.items()
             }
+            jev_seconds = perf_counter() - start
 
             result = {
                 "method_id": method_id,
                 "source_file": method_file.name,
                 "answers": answers,
+                "selection_timing": {"run_id": run_id, "jev_seconds": jev_seconds},
             }
 
             result_file = PER_METHOD_RESULTS_DIR / f"{method_file.stem}.json"

@@ -8,8 +8,8 @@
       "probabilities_percent": {
         "calls_recursion_or_cast": 0.0,
         "string_logic": 0.0,
-        "array_logic": 91.0,
-        "loop_logic": 8.0,
+        "array_logic": 93.0,
+        "loop_logic": 6.0,
         "numeric_or_branch_logic": 1.0
       }
     },
@@ -17,11 +17,11 @@
       "type": "choice",
       "selected": "dynamic_random",
       "probabilities_percent": {
-        "static_sign": 4.0,
+        "static_sign": 3.0,
         "static_interval": 7.0,
         "static_string": 0.0,
-        "dynamic_random": 63.0,
-        "dynamic_small": 26.0,
+        "dynamic_random": 68.0,
+        "dynamic_small": 22.0,
         "dynamic_mutation": 0.0
       }
     },
@@ -31,7 +31,11 @@
     },
     "use_dictionary": {
       "type": "noul",
-      "yes_probability_percent": 85.0
+      "yes_probability_percent": 88.0
     }
+  },
+  "selection_timing": {
+    "run_id": "9c9f7612066548bf84c5a45fb57ce0bb",
+    "jev_seconds": 0.17051100000389852
   }
 }

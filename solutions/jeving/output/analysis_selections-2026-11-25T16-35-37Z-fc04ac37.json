@@ -1,0 +1,333 @@
+[
+  {
+    "method_id": "jpamb.cases.Arrays.arrayContent",
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_random",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Arrays.arrayContentAboveMinus13",
+    "selected_analyzers": [
+      "dynamic_random",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Arrays.arrayInBounds",
+    "selected_analyzers": [
+      "static_interval"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Arrays.arrayIsNull",
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_random"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Arrays.arrayIsNullLength",
+    "selected_analyzers": [
+      "dynamic_small",
+      "static_interval",
+      "dynamic_random",
+      "static_sign",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Arrays.arrayLength",
+    "selected_analyzers": [
+      "static_interval",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Arrays.arrayNotEmpty",
+    "selected_analyzers": [
+      "dynamic_random",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Arrays.arrayOutOfBounds",
+    "selected_analyzers": [
+      "static_interval",
+      "dynamic_small",
+      "dynamic_random"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Arrays.arraySometimesNull",
+    "selected_analyzers": [
+      "static_interval",
+      "dynamic_small",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Arrays.arraySpellsHello",
+    "selected_analyzers": [
+      "dynamic_random",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Arrays.arraySumIsLarge",
+    "selected_analyzers": [
+      "dynamic_random",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Arrays.binarySearch",
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Calls.allPrimesArePositive",
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Calls.callsAssertFalse",
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Calls.callsAssertFib",
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Calls.callsAssertIf",
+    "selected_analyzers": [
+      "dynamic_small"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Calls.callsAssertIfWithTrue",
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Calls.callsAssertTrue",
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Dependent.badNormalizedDistance",
+    "selected_analyzers": [
+      "static_interval",
+      "dynamic_small",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Dependent.divisionLoop",
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Dependent.normalizedDistance",
+    "selected_analyzers": [
+      "static_interval",
+      "dynamic_small",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Dependent.safeDivByN",
+    "selected_analyzers": [
+      "static_interval",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Loops.forever",
+    "selected_analyzers": [
+      "dynamic_small"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Loops.neverAsserts",
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Loops.neverDivides",
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Loops.terminates",
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Simple.assertBoolean",
+    "selected_analyzers": [
+      "dynamic_small",
+      "static_interval"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Simple.assertFalse",
+    "selected_analyzers": [
+      "dynamic_small"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Simple.assertInteger",
+    "selected_analyzers": [
+      "static_sign",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Simple.assertPositive",
+    "selected_analyzers": [
+      "static_sign",
+      "dynamic_small",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Simple.assertTrue",
+    "selected_analyzers": [
+      "dynamic_small"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Simple.checkBeforeAssert",
+    "selected_analyzers": [
+      "static_sign",
+      "dynamic_small",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Simple.checkBeforeDivideByN",
+    "selected_analyzers": [
+      "static_sign",
+      "dynamic_small",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Simple.checkBeforeDivideByN2",
+    "selected_analyzers": [
+      "static_interval",
+      "dynamic_small",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Simple.divideByN",
+    "selected_analyzers": [
+      "static_sign",
+      "dynamic_small"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Simple.divideByNMinus10054203",
+    "selected_analyzers": [
+      "static_sign",
+      "dynamic_small",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Simple.divideByZero",
+    "selected_analyzers": [
+      "static_sign"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Simple.divideZeroByZero",
+    "selected_analyzers": [
+      "static_sign",
+      "dynamic_small"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Simple.doNothing",
+    "selected_analyzers": [
+      "static_sign"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Simple.earlyReturn",
+    "selected_analyzers": [
+      "static_interval"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Simple.justAdd",
+    "selected_analyzers": [
+      "static_sign"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Simple.justMulitply",
+    "selected_analyzers": [
+      "static_sign"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Simple.justReturn",
+    "selected_analyzers": [
+      "static_sign"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Simple.justReturnNothing",
+    "selected_analyzers": [
+      "static_sign"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Simple.multiError",
+    "selected_analyzers": [
+      "dynamic_small",
+      "static_interval"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Strings.sayHello",
+    "selected_analyzers": [
+      "static_string",
+      "dynamic_random",
+      "dynamic_coverage"
+    ]
+  },
+  {
+    "method_id": "jpamb.cases.Tricky.collatz",
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_coverage"
+    ]
+  }
+]
