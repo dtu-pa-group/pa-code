@@ -31,7 +31,11 @@
     },
     "use_dictionary": {
       "type": "noul",
-      "yes_probability_percent": 67.0
+      "yes_probability_percent": 70.0
     }
+  },
+  "selection_timing": {
+    "run_id": "9c9f7612066548bf84c5a45fb57ce0bb",
+    "jev_seconds": 0.23512608301825821
   }
 }

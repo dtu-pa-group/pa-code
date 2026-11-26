@@ -27,11 +27,15 @@
     },
     "needs_complementary_analysis": {
       "type": "noul",
-      "yes_probability_percent": 39.0
+      "yes_probability_percent": 37.0
     },
     "use_dictionary": {
       "type": "noul",
-      "yes_probability_percent": 95.0
+      "yes_probability_percent": 94.0
     }
+  },
+  "selection_timing": {
+    "run_id": "9c9f7612066548bf84c5a45fb57ce0bb",
+    "jev_seconds": 0.1603831250104122
   }
 }

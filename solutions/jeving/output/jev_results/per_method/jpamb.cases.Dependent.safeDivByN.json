@@ -17,11 +17,11 @@
       "type": "choice",
       "selected": "static_interval",
       "probabilities_percent": {
-        "static_sign": 23.0,
-        "static_interval": 72.0,
+        "static_sign": 24.0,
+        "static_interval": 73.0,
         "static_string": 0.0,
         "dynamic_random": 1.0,
-        "dynamic_small": 4.0,
+        "dynamic_small": 2.0,
         "dynamic_mutation": 0.0
       }
     },
@@ -31,7 +31,11 @@
     },
     "use_dictionary": {
       "type": "noul",
-      "yes_probability_percent": 83.0
+      "yes_probability_percent": 82.0
     }
+  },
+  "selection_timing": {
+    "run_id": "9c9f7612066548bf84c5a45fb57ce0bb",
+    "jev_seconds": 0.17328424999141134
   }
 }
