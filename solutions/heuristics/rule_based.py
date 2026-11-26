@@ -2,21 +2,21 @@
 """
 Rule-Based Heuristic Selector for JPAMB.
 
-Inspects a Java method's decompiled JVM bytecode, extracts features, and
-applies rules R1a–R9b to return a list of analyzer names compatible with
-engine.py (e.g. ["static_sign", "static_interval", "dynamic_small", "dynamic_mutation"]).
+Extracts structural and control-flow features from a Java method's
+decompiled JVM bytecode and applies rules R1a–R9b to choose a tailored mix of
+static and dynamic analyses for `engine.py` (including coverage-guided
+fuzzing for loops and complex branches).
 
-Saves each run's selections and predictions to:
+Records per-run analyzer selections and predictions under:
     solutions/heuristics/output/output_1.json, output_2.json, ...
 
-From Python:
+Python API:
     analyses = select_for_method(method_id)
-    preds = engine.run(analyses, method_id)
+    predictions = engine.run(analyses, method_id)
 
-From JPAMB:
+CLI / JPAMB usage:
     uv run jpamb analyse -- python solutions/heuristics/rule_based.py
 """
-
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -292,15 +292,17 @@ def select_analyzers(f: MethodFeatures) -> list[str]:
     if f.has_array_param or f.has_array_ops:
         return ["static_interval", *_best_dynamic(f)]
 
-    # R5a / R5b: Loops
+    # R5a / R5b: Loops (dynamic fuzzer rule)
     if f.has_loops:
-        return _best_dynamic(f)
+        return ["dynamic_coverage"]
 
     # R6: Branch-guarded division
     if f.has_division and f.branch_count > 0:
         return ["static_sign", "static_interval", *_best_dynamic(f)]
 
-    # R7: Numeric arithmetic or branches
+    # R7: Numeric arithmetic or branches (dynamic fuzzer rule for deeper branching)
+    if f.branch_count >= 3:
+        return ["static_interval", "dynamic_coverage"]
     if f.branch_count > 0 or f.has_int_arithmetic:
         return ["static_interval", *_best_dynamic(f)]
 
