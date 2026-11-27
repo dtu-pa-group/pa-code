@@ -1,0 +1,363 @@
+{
+  "jpamb.cases.Arrays.arrayContent:()V": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.0002695829898584634
+  },
+  "jpamb.cases.Arrays.arrayContentAboveMinus13:()V": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00020820897771045566
+  },
+  "jpamb.cases.Arrays.arrayInBounds:()V": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.0001820419856812805
+  },
+  "jpamb.cases.Arrays.arrayIsNull:()V": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00017020798986777663
+  },
+  "jpamb.cases.Arrays.arrayIsNullLength:()V": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.0001742919848766178
+  },
+  "jpamb.cases.Arrays.arrayLength:()V": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00016862500342540443
+  },
+  "jpamb.cases.Arrays.arrayNotEmpty:([I)V": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_random"
+    ],
+    "selection_seconds": 0.00017449998995289207
+  },
+  "jpamb.cases.Arrays.arrayOutOfBounds:()V": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00016554197645746171
+  },
+  "jpamb.cases.Arrays.arraySometimesNull:(I)V": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00017045802087523043
+  },
+  "jpamb.cases.Arrays.arraySpellsHello:([C)V": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_random"
+    ],
+    "selection_seconds": 0.0001709159987512976
+  },
+  "jpamb.cases.Arrays.arraySumIsLarge:([I)V": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_random"
+    ],
+    "selection_seconds": 0.00016895798034965992
+  },
+  "jpamb.cases.Arrays.binarySearch:(I)V": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00017504199058748782
+  },
+  "jpamb.cases.Calls.allPrimesArePositive:(I)V": {
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00014162500156089664
+  },
+  "jpamb.cases.Calls.callsAssertFalse:()V": {
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00011820899089798331
+  },
+  "jpamb.cases.Calls.callsAssertFib:(I)V": {
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.0002119579876307398
+  },
+  "jpamb.cases.Calls.callsAssertIf:(Z)V": {
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00015475001418963075
+  },
+  "jpamb.cases.Calls.callsAssertIfWithTrue:()V": {
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00013204201241023839
+  },
+  "jpamb.cases.Calls.callsAssertTrue:()V": {
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.0001222910068463534
+  },
+  "jpamb.cases.Dependent.badNormalizedDistance:(II)I": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 9.38749872148037e-05
+  },
+  "jpamb.cases.Dependent.divisionLoop:(I)V": {
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 7.983300019986928e-05
+  },
+  "jpamb.cases.Dependent.normalizedDistance:(II)I": {
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 7.658300455659628e-05
+  },
+  "jpamb.cases.Dependent.safeDivByN:(I)I": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 7.029197877272964e-05
+  },
+  "jpamb.cases.Loops.forever:()V": {
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 6.637501064687967e-05
+  },
+  "jpamb.cases.Loops.neverAsserts:()V": {
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 5.76250022277236e-05
+  },
+  "jpamb.cases.Loops.neverDivides:()I": {
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 5.5042008170858026e-05
+  },
+  "jpamb.cases.Loops.terminates:()V": {
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 5.599998985417187e-05
+  },
+  "jpamb.cases.Simple.assertBoolean:(Z)V": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00012799998512491584
+  },
+  "jpamb.cases.Simple.assertFalse:()V": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00011708401143550873
+  },
+  "jpamb.cases.Simple.assertInteger:(I)V": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00011387499398551881
+  },
+  "jpamb.cases.Simple.assertPositive:(I)V": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00011254101991653442
+  },
+  "jpamb.cases.Simple.assertTrue:()V": {
+    "selected_analyzers": [
+      "static_sign",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00011195900151506066
+  },
+  "jpamb.cases.Simple.checkBeforeAssert:(I)V": {
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00011683302000164986
+  },
+  "jpamb.cases.Simple.checkBeforeDivideByN2:(I)I": {
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00011737502063624561
+  },
+  "jpamb.cases.Simple.checkBeforeDivideByN:(I)I": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00011262501357123256
+  },
+  "jpamb.cases.Simple.divideByN:(I)I": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00011204098700545728
+  },
+  "jpamb.cases.Simple.divideByNMinus10054203:(I)I": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.0001139590167440474
+  },
+  "jpamb.cases.Simple.divideByZero:()I": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00011291602277196944
+  },
+  "jpamb.cases.Simple.divideZeroByZero:(II)I": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00011412502499297261
+  },
+  "jpamb.cases.Simple.doNothing:()V": {
+    "selected_analyzers": [
+      "static_sign",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00011354201706126332
+  },
+  "jpamb.cases.Simple.earlyReturn:()I": {
+    "selected_analyzers": [
+      "static_sign",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00011291599366813898
+  },
+  "jpamb.cases.Simple.justAdd:(II)I": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00011333299335092306
+  },
+  "jpamb.cases.Simple.justMulitply:(II)I": {
+    "selected_analyzers": [
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00011266701039858162
+  },
+  "jpamb.cases.Simple.justReturn:()I": {
+    "selected_analyzers": [
+      "static_sign",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00011008302681148052
+  },
+  "jpamb.cases.Simple.justReturnNothing:()V": {
+    "selected_analyzers": [
+      "static_sign",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.00011208400246687233
+  },
+  "jpamb.cases.Simple.multiError:(Z)I": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_int",
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 0.0001143749977927655
+  },
+  "jpamb.cases.Strings.sayHello:(Ljava/lang/String;)V": {
+    "selected_analyzers": [
+      "static_string",
+      "dynamic_random"
+    ],
+    "selection_seconds": 5.083397263661027e-05
+  },
+  "jpamb.cases.Tricky.collatz:(I)V": {
+    "selected_analyzers": [
+      "dynamic_small",
+      "dynamic_mutation"
+    ],
+    "selection_seconds": 6.154100992716849e-05
+  }
+}

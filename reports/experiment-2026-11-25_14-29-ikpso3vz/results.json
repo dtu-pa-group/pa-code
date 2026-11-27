@@ -1,0 +1,2560 @@
+{
+  "methods": [
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Arrays.arrayContent:()V",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00028833301621489227,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.005181957996683195,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "maybe",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.005230165988905355,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "maybe",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.005569583998294547,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "maybe",
+            "out of bounds": "maybe"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.005327235994627699,
+      "selection_plus_analysis_seconds": 0.0056155690108425915,
+      "expected_outcomes": [
+        "assertion error"
+      ],
+      "jpamb_score": 5.554460864805692
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Arrays.arrayContentAboveMinus13:()V",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00022662500850856304,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0052031670056749135,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.005374624975956976,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.005640459014102817,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.0054060836652449025,
+      "selection_plus_analysis_seconds": 0.0056327086737534655,
+      "expected_outcomes": [
+        "ok"
+      ],
+      "jpamb_score": 5.69239189928845
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Arrays.arrayInBounds:()V",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.0002029169991146773,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0036334579926915467,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.0035747500078286976,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.0036291659926064312,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.003612457997708892,
+      "selection_plus_analysis_seconds": 0.0038153749968235693,
+      "expected_outcomes": [
+        "ok"
+      ],
+      "jpamb_score": 5.8303229337712095
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Arrays.arrayIsNull:()V",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00018737500067800283,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.00331145798554644,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "yes",
+            "ok": "no",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.0034293339995201677,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "yes",
+            "ok": "no",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.00348437501816079,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "yes",
+            "ok": "no",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.003408389001075799,
+      "selection_plus_analysis_seconds": 0.003595764001753802,
+      "expected_outcomes": [
+        "null pointer"
+      ],
+      "jpamb_score": 5.8303229337712095
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Arrays.arrayIsNullLength:()V",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.0001974170154426247,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.003472209005849436,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "yes",
+            "ok": "no",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.0034424159966874868,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "yes",
+            "ok": "no",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.0034679159871302545,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "yes",
+            "ok": "no",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.0034608469965557256,
+      "selection_plus_analysis_seconds": 0.0036582640119983503,
+      "expected_outcomes": [
+        "null pointer"
+      ],
+      "jpamb_score": 5.8303229337712095
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Arrays.arrayLength:()V",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00017891699098981917,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0036265840171836317,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.0038799169997218996,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.0037697080115322024,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.0037587363428125777,
+      "selection_plus_analysis_seconds": 0.0039376533338023965,
+      "expected_outcomes": [
+        "ok"
+      ],
+      "jpamb_score": 5.8303229337712095
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Arrays.arrayNotEmpty:([I)V",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_random"
+      ],
+      "selection_seconds": 0.00017312500858679414,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.007008416985627264,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.007062791002681479,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.007129208010155708,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.007066805332821484,
+      "selection_plus_analysis_seconds": 0.007239930341408278,
+      "expected_outcomes": [
+        "assertion error",
+        "ok"
+      ],
+      "jpamb_score": 5.660645867542418
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Arrays.arrayOutOfBounds:()V",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00017566600581631064,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0035212500079069287,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "no",
+            "out of bounds": "yes"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.003639166010543704,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "no",
+            "out of bounds": "yes"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.003838083997834474,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "no",
+            "out of bounds": "yes"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.0036661666720950357,
+      "selection_plus_analysis_seconds": 0.0038418326779113463,
+      "expected_outcomes": [
+        "out of bounds"
+      ],
+      "jpamb_score": 5.8303229337712095
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Arrays.arraySometimesNull:(I)V",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00016983298701234162,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0044727080094162375,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "yes",
+            "ok": "no",
+            "out of bounds": "yes"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.004379416990559548,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "yes",
+            "ok": "no",
+            "out of bounds": "yes"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.004677834018366411,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "yes",
+            "ok": "no",
+            "out of bounds": "yes"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.004509986339447399,
+      "selection_plus_analysis_seconds": 0.00467981932645974,
+      "expected_outcomes": [
+        "null pointer",
+        "out of bounds"
+      ],
+      "jpamb_score": 5.798576902025178
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Arrays.arraySpellsHello:([C)V",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_random"
+      ],
+      "selection_seconds": 0.00016862500342540443,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.009249875001842156,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "yes"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.009238333004759625,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "yes"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.009534291981253773,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "yes"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.009340833329285184,
+      "selection_plus_analysis_seconds": 0.009509458332710588,
+      "expected_outcomes": [
+        "assertion error",
+        "ok",
+        "out of bounds"
+      ],
+      "jpamb_score": -1.5893541324575786
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Arrays.arraySumIsLarge:([I)V",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_random"
+      ],
+      "selection_seconds": 0.0001670829951763153,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.030483084003208205,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.030734583997400478,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.03093779200571589,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.030718486668774858,
+      "selection_plus_analysis_seconds": 0.030885569663951173,
+      "expected_outcomes": [
+        "assertion error",
+        "ok"
+      ],
+      "jpamb_score": 5.52271483305966
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Arrays.binarySearch:(I)V",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00017445898265577853,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0118335000006482,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.013376124989008531,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.0122118339932058,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.012473819660954177,
+      "selection_plus_analysis_seconds": 0.012648278643609956,
+      "expected_outcomes": [
+        "assertion error",
+        "ok"
+      ],
+      "jpamb_score": 5.660645867542418
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Calls.allPrimesArePositive:(I)V",
+      "selected_analyzers": [
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00013174998457543552,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.004375833988888189,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "yes"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.004605334019288421,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "yes"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.004457458009710535,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "yes"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.004479542005962382,
+      "selection_plus_analysis_seconds": 0.004611291990537818,
+      "expected_outcomes": [
+        "assertion error",
+        "ok",
+        "out of bounds"
+      ],
+      "jpamb_score": 5.490968801313628
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Calls.callsAssertFalse:()V",
+      "selected_analyzers": [
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00011558301048353314,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0008804999815765768,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.0009085419878829271,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.0009192499855998904,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "maybe"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.000902763985019798,
+      "selection_plus_analysis_seconds": 0.001018346995503331,
+      "expected_outcomes": [
+        "assertion error"
+      ],
+      "jpamb_score": 5.278598795840174
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Calls.callsAssertFib:(I)V",
+      "selected_analyzers": [
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00011624998296611011,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0038655409880448133,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.0038945839914958924,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.0038914580072741956,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "maybe"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.0038838609956049672,
+      "selection_plus_analysis_seconds": 0.004000110978571078,
+      "expected_outcomes": [
+        "assertion error",
+        "ok"
+      ],
+      "jpamb_score": -1.8334701696770643
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Calls.callsAssertIf:(Z)V",
+      "selected_analyzers": [
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00011291701230220497,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.001502541999798268,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.0017283329798374325,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.0014923340058885515,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.0015744029951747507,
+      "selection_plus_analysis_seconds": 0.0016873200074769557,
+      "expected_outcomes": [
+        "assertion error",
+        "ok"
+      ],
+      "jpamb_score": 5.384783798576901
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Calls.callsAssertIfWithTrue:()V",
+      "selected_analyzers": [
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00011095800437033176,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0011058330128435045,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.0011303330247756094,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.0011447500146459788,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.0011269720174216975,
+      "selection_plus_analysis_seconds": 0.0012379300217920293,
+      "expected_outcomes": [
+        "ok"
+      ],
+      "jpamb_score": 5.278598795840175
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Calls.callsAssertTrue:()V",
+      "selected_analyzers": [
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00011370799620635808,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0007864170183893293,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.0009223750093951821,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.0008019589877221733,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.0008369170051688949,
+      "selection_plus_analysis_seconds": 0.000950625001375253,
+      "expected_outcomes": [
+        "ok"
+      ],
+      "jpamb_score": 5.278598795840175
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Dependent.badNormalizedDistance:(II)I",
+      "selected_analyzers": [
+        "static_sign",
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 8.37499974295497e-05,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.010990125010721385,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "yes",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.020065249991603196,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "yes",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.011391457985155284,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "yes",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.014148944329159955,
+      "selection_plus_analysis_seconds": 0.014232694326589504,
+      "expected_outcomes": [
+        "divide by zero",
+        "ok"
+      ],
+      "jpamb_score": 5.798576902025178
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Dependent.divisionLoop:(I)V",
+      "selected_analyzers": [
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 7.279199780896306e-05,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.002934541000286117,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.003346707992022857,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.002976791001856327,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.003086013331388434,
+      "selection_plus_analysis_seconds": 0.003158805329197397,
+      "expected_outcomes": [
+        "assertion error",
+        "ok"
+      ],
+      "jpamb_score": -1.8334701696770643
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Dependent.normalizedDistance:(II)I",
+      "selected_analyzers": [
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 7.470897980965674e-05,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0072467499994672835,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "yes",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.008599209017120302,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "yes",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.007524625019868836,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "yes",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.007790194678818807,
+      "selection_plus_analysis_seconds": 0.007864903658628464,
+      "expected_outcomes": [
+        "ok"
+      ],
+      "jpamb_score": -26.083470169676954
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Dependent.safeDivByN:(I)I",
+      "selected_analyzers": [
+        "static_sign",
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 6.762499106116593e-05,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.003779916005441919,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.004319041996495798,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.003842042002361268,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.003980333334766328,
+      "selection_plus_analysis_seconds": 0.004047958325827494,
+      "expected_outcomes": [
+        "ok"
+      ],
+      "jpamb_score": 5.8303229337712095
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Loops.forever:()V",
+      "selected_analyzers": [
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 6.250001024454832e-05,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0014225830091163516,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.0017405420076102018,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.0014345830131787807,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "maybe"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.001532569343301778,
+      "selection_plus_analysis_seconds": 0.0015950693535463263,
+      "expected_outcomes": [
+        "*"
+      ],
+      "jpamb_score": -1.9396551724137916
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Loops.neverAsserts:()V",
+      "selected_analyzers": [
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 5.549998604692519e-05,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0013629590102937073,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.0016018339956644922,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.001400790992192924,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "maybe"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.0014551946660503745,
+      "selection_plus_analysis_seconds": 0.0015106946520972997,
+      "expected_outcomes": [
+        "*"
+      ],
+      "jpamb_score": -1.9396551724137916
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Loops.neverDivides:()I",
+      "selected_analyzers": [
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 5.449997843243182e-05,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.001398916996549815,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.0016237499949056655,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.00144283301779069,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "maybe"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.0014885000030820568,
+      "selection_plus_analysis_seconds": 0.0015429999815144886,
+      "expected_outcomes": [
+        "*"
+      ],
+      "jpamb_score": -1.9396551724137916
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Loops.terminates:()V",
+      "selected_analyzers": [
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 5.541701102629304e-05,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0005546249740291387,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.0006672919844277203,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.0005777910118922591,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "maybe"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.0005999026567830393,
+      "selection_plus_analysis_seconds": 0.0006553196678093324,
+      "expected_outcomes": [
+        "assertion error"
+      ],
+      "jpamb_score": 5.278598795840174
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Simple.assertBoolean:(Z)V",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.0001233329821843654,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.003519417019560933,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.004109500005142763,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.0035723329929169267,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.003733750005873541,
+      "selection_plus_analysis_seconds": 0.0038570829880579063,
+      "expected_outcomes": [
+        "assertion error",
+        "ok"
+      ],
+      "jpamb_score": 5.798576902025178
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Simple.assertFalse:()V",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00011283400817774236,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.003294458001619205,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "no",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.0038498749781865627,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "no",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.0035165419976692647,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "no",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.0035536249924916774,
+      "selection_plus_analysis_seconds": 0.0036664590006694198,
+      "expected_outcomes": [
+        "assertion error"
+      ],
+      "jpamb_score": 5.8303229337712095
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Simple.assertInteger:(I)V",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00011149997590109706,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0036554580146912485,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.0037684999988414347,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.003943957999581471,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.003789305337704718,
+      "selection_plus_analysis_seconds": 0.003900805313605815,
+      "expected_outcomes": [
+        "assertion error",
+        "ok"
+      ],
+      "jpamb_score": 5.798576902025178
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Simple.assertPositive:(I)V",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.0001100839872378856,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0038330419920384884,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.004189833009149879,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.004029458010336384,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.0040174443371749175,
+      "selection_plus_analysis_seconds": 0.004127528324412803,
+      "expected_outcomes": [
+        "assertion error",
+        "ok"
+      ],
+      "jpamb_score": 5.798576902025178
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Simple.assertTrue:()V",
+      "selected_analyzers": [
+        "static_sign",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00012050001532770693,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0031570830033160746,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.003606457990827039,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.003192042000591755,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.0033185276649116227,
+      "selection_plus_analysis_seconds": 0.0034390276802393296,
+      "expected_outcomes": [
+        "ok"
+      ],
+      "jpamb_score": 5.8303229337712095
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Simple.checkBeforeAssert:(I)V",
+      "selected_analyzers": [
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00011475000064820051,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0012351250043138862,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.0013140840164851397,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.0012764169950969517,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.001275208671965326,
+      "selection_plus_analysis_seconds": 0.0013899586726135265,
+      "expected_outcomes": [
+        "assertion error",
+        "ok"
+      ],
+      "jpamb_score": 5.384783798576901
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Simple.checkBeforeDivideByN2:(I)I",
+      "selected_analyzers": [
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00011100000119768083,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0009607080137357116,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.0010117500205524266,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.0009884170140139759,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "maybe",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.000986958349434038,
+      "selection_plus_analysis_seconds": 0.0010979583506317188,
+      "expected_outcomes": [
+        "ok"
+      ],
+      "jpamb_score": 5.278598795840175
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Simple.checkBeforeDivideByN:(I)I",
+      "selected_analyzers": [
+        "static_sign",
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.0001101669913623482,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0040235419874079525,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.00442795900744386,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.004127000021981075,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.004192833672277629,
+      "selection_plus_analysis_seconds": 0.004303000663639978,
+      "expected_outcomes": [
+        "assertion error",
+        "ok"
+      ],
+      "jpamb_score": 5.798576902025178
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Simple.divideByN:(I)I",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00011387499398551881,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0035387919924687594,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "yes",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.0036780000082217157,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "yes",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.003648999991128221,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "yes",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.0036219306639395654,
+      "selection_plus_analysis_seconds": 0.0037358056579250842,
+      "expected_outcomes": [
+        "divide by zero",
+        "ok"
+      ],
+      "jpamb_score": 5.798576902025178
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Simple.divideByNMinus10054203:(I)I",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00011020898818969727,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.003887874976499006,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "maybe",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.004080582992173731,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "maybe",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.0037540000048466027,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "maybe",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.003907485991173114,
+      "selection_plus_analysis_seconds": 0.004017694979362811,
+      "expected_outcomes": [
+        "divide by zero",
+        "ok"
+      ],
+      "jpamb_score": -1.4196770662287879
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Simple.divideByZero:()I",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00011845800327137113,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.003356750006787479,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "yes",
+            "null pointer": "no",
+            "ok": "no",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.0035304169869050384,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "yes",
+            "null pointer": "no",
+            "ok": "no",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.003238041012082249,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "yes",
+            "null pointer": "no",
+            "ok": "no",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.0033750693352582553,
+      "selection_plus_analysis_seconds": 0.0034935273385296264,
+      "expected_outcomes": [
+        "divide by zero"
+      ],
+      "jpamb_score": 5.8303229337712095
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Simple.divideZeroByZero:(II)I",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00011545800953172147,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.005064333003247157,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "yes",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.005553875002078712,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "yes",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.005146208975929767,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "yes",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.005254805660418545,
+      "selection_plus_analysis_seconds": 0.005370263669950266,
+      "expected_outcomes": [
+        "divide by zero",
+        "ok"
+      ],
+      "jpamb_score": 5.798576902025178
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Simple.doNothing:()V",
+      "selected_analyzers": [
+        "static_sign",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00010799997835420072,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0031871670216787606,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.0037274580099619925,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.0031655410130042583,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.003360055348215004,
+      "selection_plus_analysis_seconds": 0.0034680553265692047,
+      "expected_outcomes": [
+        "ok"
+      ],
+      "jpamb_score": 5.8303229337712095
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Simple.earlyReturn:()I",
+      "selected_analyzers": [
+        "static_sign",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00010808301158249378,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.003155290993163362,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.0032730420061852783,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.003274958988185972,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.0032344306625115373,
+      "selection_plus_analysis_seconds": 0.003342513674094031,
+      "expected_outcomes": [
+        "ok"
+      ],
+      "jpamb_score": 5.8303229337712095
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Simple.justAdd:(II)I",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00010941599612124264,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.005142707988852635,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.005483624991029501,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.005169250012841076,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.005265194330907737,
+      "selection_plus_analysis_seconds": 0.00537461032702898,
+      "expected_outcomes": [
+        "ok"
+      ],
+      "jpamb_score": 5.8303229337712095
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Simple.justMulitply:(II)I",
+      "selected_analyzers": [
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.0001093749888241291,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.005219624988967553,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.00541112499195151,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.0053547919960692525,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.005328513992329438,
+      "selection_plus_analysis_seconds": 0.005437888981153567,
+      "expected_outcomes": [
+        "ok"
+      ],
+      "jpamb_score": 5.8303229337712095
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Simple.justReturn:()I",
+      "selected_analyzers": [
+        "static_sign",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00010804200428538024,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0034627080021891743,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.003214958996977657,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.0033702499931678176,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.0033493056641115495,
+      "selection_plus_analysis_seconds": 0.0034573476683969298,
+      "expected_outcomes": [
+        "ok"
+      ],
+      "jpamb_score": 5.8303229337712095
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Simple.justReturnNothing:()V",
+      "selected_analyzers": [
+        "static_sign",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.0001086670090444386,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0031270420004148036,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.003201458021067083,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.0033957499836105853,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "no",
+            "divide by zero": "no",
+            "null pointer": "no",
+            "ok": "yes",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.0032414166683641574,
+      "selection_plus_analysis_seconds": 0.003350083677408596,
+      "expected_outcomes": [
+        "ok"
+      ],
+      "jpamb_score": 5.8303229337712095
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Simple.multiError:(Z)I",
+      "selected_analyzers": [
+        "static_sign",
+        "static_int",
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 0.00011033299961127341,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0037447920185513794,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "yes",
+            "null pointer": "no",
+            "ok": "no",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.004123958002310246,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "yes",
+            "null pointer": "no",
+            "ok": "no",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.004263374983565882,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "yes",
+            "null pointer": "no",
+            "ok": "no",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.004044041668142502,
+      "selection_plus_analysis_seconds": 0.004154374667753776,
+      "expected_outcomes": [
+        "assertion error",
+        "divide by zero"
+      ],
+      "jpamb_score": 5.798576902025178
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Strings.sayHello:(Ljava/lang/String;)V",
+      "selected_analyzers": [
+        "static_string",
+        "dynamic_random"
+      ],
+      "selection_seconds": 4.979199729859829e-05,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.008940583007643,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.00913849999778904,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "no"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.00894987498759292,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "no",
+            "null pointer": "maybe",
+            "ok": "maybe",
+            "out of bounds": "no"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.009009652664341653,
+      "selection_plus_analysis_seconds": 0.009059444661640251,
+      "expected_outcomes": [
+        "assertion error",
+        "ok"
+      ],
+      "jpamb_score": -1.5576081007115468
+    },
+    {
+      "strategy": "heuristic",
+      "method_id": "jpamb.cases.Tricky.collatz:(I)V",
+      "selected_analyzers": [
+        "dynamic_small",
+        "dynamic_mutation"
+      ],
+      "selection_seconds": 5.7042023399844766e-05,
+      "analysis_runs": [
+        {
+          "iteration": 1,
+          "analysis_seconds": 0.0022955410240683705,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 2,
+          "analysis_seconds": 0.002340791979804635,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        },
+        {
+          "iteration": 3,
+          "analysis_seconds": 0.0023539999965578318,
+          "predictions": {
+            "*": "maybe",
+            "assertion error": "yes",
+            "divide by zero": "maybe",
+            "null pointer": "maybe",
+            "ok": "yes",
+            "out of bounds": "maybe"
+          }
+        }
+      ],
+      "mean_analysis_seconds": 0.0023301110001436123,
+      "selection_plus_analysis_seconds": 0.002387153023543457,
+      "expected_outcomes": [
+        "assertion error",
+        "ok"
+      ],
+      "jpamb_score": 5.384783798576901
+    }
+  ],
+  "strategies": [
+    {
+      "strategy": "heuristic",
+      "methods": 47,
+      "selection_seconds": 0.0057792519219219685,
+      "mean_analysis_seconds": 0.21982562603079714,
+      "selection_plus_analysis_seconds": 0.2256048779527191,
+      "jpamb_score": 175.6351943076082
+    }
+  ]
+}

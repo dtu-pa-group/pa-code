@@ -1,0 +1,566 @@
+{
+  "jpamb.cases.Arrays.arrayContent:()V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Arrays.arrayContentAboveMinus13:()V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Arrays.arrayInBounds:()V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Arrays.arrayIsNull:()V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Arrays.arrayIsNullLength:()V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Arrays.arrayLength:()V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Arrays.arrayNotEmpty:([I)V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Arrays.arrayOutOfBounds:()V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Arrays.arraySometimesNull:(I)V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Arrays.arraySpellsHello:([C)V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Arrays.arraySumIsLarge:([I)V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Arrays.binarySearch:(I)V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Calls.allPrimesArePositive:(I)V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Calls.callsAssertFalse:()V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Calls.callsAssertFib:(I)V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Calls.callsAssertIf:(Z)V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Calls.callsAssertIfWithTrue:()V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Calls.callsAssertTrue:()V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Dependent.badNormalizedDistance:(II)I": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Dependent.divisionLoop:(I)V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Dependent.normalizedDistance:(II)I": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Dependent.safeDivByN:(I)I": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Loops.forever:()V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Loops.neverAsserts:()V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Loops.neverDivides:()I": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Loops.terminates:()V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Simple.assertBoolean:(Z)V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Simple.assertFalse:()V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Simple.assertInteger:(I)V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Simple.assertPositive:(I)V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Simple.assertTrue:()V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Simple.checkBeforeAssert:(I)V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Simple.checkBeforeDivideByN2:(I)I": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Simple.checkBeforeDivideByN:(I)I": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Simple.divideByN:(I)I": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Simple.divideByNMinus10054203:(I)I": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Simple.divideByZero:()I": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Simple.divideZeroByZero:(II)I": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Simple.doNothing:()V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Simple.earlyReturn:()I": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Simple.justAdd:(II)I": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Simple.justMulitply:(II)I": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Simple.justReturn:()I": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Simple.justReturnNothing:()V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Simple.multiError:(Z)I": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Strings.sayHello:(Ljava/lang/String;)V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  },
+  "jpamb.cases.Tricky.collatz:(I)V": {
+    "selected_analyzers": [
+      "static_sign",
+      "static_string",
+      "static_int",
+      "dynamic_random",
+      "dynamic_small",
+      "dynamic_mutation",
+      "dynamic_coverage"
+    ],
+    "selection_seconds": 0.0
+  }
+}

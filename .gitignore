@@ -11,8 +11,6 @@ __pycache__
 result.json
 .venv
 
-reports/
-
 *.egg-info/
 dist/
 *.pyd
